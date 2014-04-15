@@ -13,4 +13,12 @@ public abstract class Node {
 	public abstract void initInputs();
 	public abstract void initOutputs();
 	public abstract String getName();
+	
+	public PinInput getInputPin(int index){
+		return in[index];
+	}
+	
+	public PinOutput getOutputPin(int index){
+		return out[index];
+	}
 }

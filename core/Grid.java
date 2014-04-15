@@ -2,6 +2,10 @@ package core;
 
 public class Grid {
 	
+	public static boolean connect(Node source, int indexOut, Node target, int indexIn){
+		return connect(source.getOutputPin(indexOut), target.getInputPin(indexIn));
+	}
+	
 	public static boolean connect(PinOutput out, PinInput in){
 		if(out instanceof PinProgram && in instanceof PinProgram
 		|| out instanceof PinValue && in instanceof PinValue && ((PinValue<?>) out).getType()==((PinValue<?>) in).getType()
