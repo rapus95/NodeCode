@@ -1,12 +1,13 @@
 package core;
 
+import core.ValueType.COLOR;
+
 
 
 public class PinProgramIn extends PinBaseImp implements PinInput, PinProgram {
 
 	public PinProgramIn(Node parent, String name) {
 		super(parent, name);
-		color = COLOR.RED;
 	}
 
 	@Override
@@ -17,6 +18,16 @@ public class PinProgramIn extends PinBaseImp implements PinInput, PinProgram {
 
 	public PinOutput getOrigin() {
 		return null;
+	}
+
+	@Override
+	public boolean isValidFor(PinOutput out) {
+		return out instanceof PinProgramOut;
+	}
+
+	@Override
+	public COLOR getColor() {
+		return COLOR.RED;
 	}
 
 }

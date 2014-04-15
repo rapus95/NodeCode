@@ -1,9 +1,10 @@
 package core;
 
+import core.ValueType.COLOR;
 
-public class PinValueOut<Type> extends PinBaseImp implements PinOutput, PinValue<Type> {
 
-	private PinInput target;
+public class PinValueOut<Type> extends PinBaseImp implements PinOutput, ValueHandler<Type> {
+	
 	private ValueType<Type> data;
 	
 	public PinValueOut(Node parent, String name, ValueType<Type> var) {
@@ -12,33 +13,53 @@ public class PinValueOut<Type> extends PinBaseImp implements PinOutput, PinValue
 	}
 
 	@Override
-	public void setTargetUnchecked(PinInput target) {
-		if(target instanceof PinValue && this.getType()==((PinValue<?>)target).getType()){
-			this.target = target;
-		}
-	}
+	public void setTargetUnchecked(PinInput target) {}
 
 	@Override
-	public void removeTargetUnchecked(PinInput target) {
-		if(this.target==target)
-			target=null;
-	}
+	public void removeTargetUnchecked(PinInput target) {}
 
 	@Override
 	public PinInput getTarget() {
-		return target;
+		return null;
 	}
-
+	
 	@Override
-	public void initialize() {}
+	public ValueType<Type> getData(){
+		return data;
+	}
 
 	@Override
 	public Type getValue() {
 		return data.getValue();
+	}
+	
+	@Override
+	public void setValueUnchecked(Object t) {
+		if(getType().isInstance(t)){
+			data.setValue(getType().cast(t));
+			return;
+		}
+		throw new RuntimeException("WRONG TYPE!!");
 	}
 
 	@Override
 	public Class<Type> getType() {
 		return data.getType();
 	}
+
+	@Override
+	public boolean isValidFor(PinInput in) {
+		return in instanceof PinValueIn && this.getType()==((PinValueIn<?>)in).getType();
+	}
+
+	@Override
+	public void init() {
+		data.init();
+	}
+
+	@Override
+	public COLOR getColor() {
+		return data.getColor();
+	}
+
 }

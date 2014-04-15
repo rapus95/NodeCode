@@ -1,21 +1,31 @@
 package core;
 
+import core.ValueType.COLOR;
 
-public class PinValueIn<Type> extends PinBaseImp implements PinInput, PinValue<Type> {
 
-	private final Class<Type> type;
+public class PinValueIn<Type> extends PinBaseImp implements PinInput, ValueHandler<Type> {
+
+	private ValueType<Type> data;
 	private PinOutput origin=null;
+	private boolean allowDirectInput=true;
 	
-	public PinValueIn(Node parent, String name, Class<Type> type){
+	public PinValueIn(Node parent, String name, ValueType<Type> var){
+		this(parent, name, var, true);
+	}
+	
+	public PinValueIn(Node parent, String name, ValueType<Type> var, boolean allowDirectInput){
 		super(parent, name);
-		this.type = type;
+		data = var;
+		this.allowDirectInput = allowDirectInput;
 	}
 
 	@Override
 	public void setOriginUnchecked(PinOutput origin) {
-		if(origin instanceof PinValue && this.getType()==((PinValue<?>)origin).getType()){
+		if(isValidFor(origin)){
 			this.origin = origin;
+			return;
 		}
+		throw new RuntimeException("WRONG PIN-TYPE!!");
 	}
 
 	@Override
@@ -28,20 +38,51 @@ public class PinValueIn<Type> extends PinBaseImp implements PinInput, PinValue<T
 	public PinOutput getOrigin() {
 		return origin;
 	}
+	
+	@Override
+	public ValueType<Type> getData(){
+		return data;
+	}
 
 	@Override
 	public Type getValue() {
-		return type.cast(((PinValue<?>)getOrigin()).getValue());
+		return getOrigin()==null?data.getValue():PinValueIn.<Type>getValue((ValueHandler<?>)getOrigin());
+	}
+
+	@Override
+	public void setValueUnchecked(Object t) {
+		if(!allowsDirectInput())
+			throw new RuntimeException("Direct Input not allowed");
+		data.setValueUnchecked(t);
 	}
 
 	@Override
 	public Class<Type> getType() {
-		return type;
+		return data.getType();
+	}
+	
+	public boolean allowsDirectInput(){
+		return allowDirectInput && data.canHaveDirectInput();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <Type> Type getValue(PinValue<?> in){
+	public static <Type> Type getValue(ValueHandler<?> in){
 		return (Type)in.getValue();
+	}
+
+	@Override
+	public boolean isValidFor(PinOutput out) {
+		return out instanceof PinValueOut && this.data.canConvert(((PinValueOut<?>)out).getType());
+	}
+
+	@Override
+	public void init() {
+		data.init();
+	}
+
+	@Override
+	public COLOR getColor() {
+		return data.getColor();
 	}
 
 }

@@ -1,21 +1,25 @@
 package core;
 
+import core.ValueType.COLOR;
+
+
 
 
 public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
 
 	public PinProgramOut(Node parent, String name) {
 		super(parent, name);
-		color = COLOR.RED;
 	}
 
 	private PinProgramIn target = null;
 
 	@Override
 	public void setTargetUnchecked(PinInput target) {
-		if(target instanceof PinProgram){
+		if(isValidFor(target)){
 			setTarget((PinProgramIn) target);
+			return;
 		}
+		throw new RuntimeException("WRONG PIN-TYPE!!");
 	}
 	
 	public void setTarget(PinProgramIn target) {
@@ -32,8 +36,15 @@ public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
 	public PinProgramIn getTarget() {
 		return target;
 	}
+	
+	@Override
+	public boolean isValidFor(PinInput in) {
+		return in instanceof PinProgramIn;
+	}
 
 	@Override
-	public void initialize() {}
+	public COLOR getColor() {
+		return COLOR.RED;
+	}
 
 }

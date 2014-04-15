@@ -1,31 +1,47 @@
+import type.ItemStack;
+import type.ItemStackData;
 import type.NumberData;
 import core.Node;
-import core.PinOutput;
 import core.PinProgramOut;
 import core.PinValueOut;
 
 
 public class InputNodeSeperator extends Node {
 
+	ItemStack itemStack = new ItemStack(0, 0, 0);
+	int dir;
+	
 	@Override
 	public Node run() {
-		return out[0].getTarget().getNode();
+		getValOut(0).setValueUnchecked(itemStack);
+		getValOut(1).setValueUnchecked(dir);
+		return getProgOut(0).getTarget().getNode();
 	}
 
 	@Override
 	public void initInputs() {}
 
 	@Override
+	public void initConfigs() {}
+
+	@Override
 	public void initOutputs() {
-		out = new PinOutput[3];
-		out[0] = new PinProgramOut(this, "ProgOut");
-		out[1] = new PinValueOut<Number>(this, "itemID", new NumberData());
-		out[2] = new PinValueOut<Number>(this, "itemCount", new NumberData());
+		progOut.add(new PinProgramOut(this, "ProgOut"));
+		valOut.add(new PinValueOut<ItemStack>(this, "itemStack", new ItemStackData()));
+		valOut.add(new PinValueOut<Number>(this, "dir", new NumberData()));
 	}
 
 	@Override
-	public String getName() {
+	public String getDefaultName() {
 		return "Input Node";
+	}
+	
+	public void setItemStack(ItemStack is){
+		this.itemStack = is;
+	}
+	
+	public void setDirection(int i){
+		dir = i;
 	}
 
 }

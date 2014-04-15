@@ -1,11 +1,9 @@
 package core;
 
-import core.PinBaseImp.COLOR;
+import core.ValueType.COLOR;
 
-public interface PinBase {
+public interface PinBase extends NodeComponent {
 
-	public Node getNode();
-	public String getName();
 	public COLOR getColor();
 
 }

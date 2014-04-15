@@ -2,22 +2,24 @@ package type;
 
 import core.ValueType;
 
-public class NumberData implements ValueType<Number>{
+public class ItemStackData implements ValueType<ItemStack> {
+
+	ItemStack is;
 	
-	private double i;
-
-	public Number getValue() {
-		return i;
+	
+	@Override
+	public ItemStack getValue() {
+		return is;
 	}
 
 	@Override
-	public void setValue(Number dt) {
-		this.i = dt.doubleValue();
+	public void setValue(ItemStack dt) {
+		is=dt;
 	}
 
 	@Override
-	public Class<Number> getType() {
-		return Number.class;
+	public Class<ItemStack> getType() {
+		return ItemStack.class;
 	}
 
 	@Override
@@ -27,12 +29,13 @@ public class NumberData implements ValueType<Number>{
 
 	@Override
 	public void setValueUnchecked(Object o) {
-		if(canConvert(o.getClass()))
-			setValue(convert(o));
+		if(!canConvert(o.getClass()))
+			return;
+		setValue(convert(o));
 	}
 
 	@Override
-	public Number convert(Object o) {
+	public ItemStack convert(Object o) {
 		return this.getType().cast(o);
 	}
 
@@ -43,11 +46,12 @@ public class NumberData implements ValueType<Number>{
 
 	@Override
 	public void init() {
-		i = 0;
+		 is = new ItemStack(0, 0, 0);
 	}
 
 	@Override
 	public COLOR getColor() {
-		return COLOR.BLUE;
+		return COLOR.BLACK;
 	}
+
 }
