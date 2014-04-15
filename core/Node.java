@@ -1,12 +1,13 @@
 package core;
 
 public abstract class Node {
-	protected PinInput in[];
-	protected PinOutput out[];
+	protected PinInput in[] = new PinInput[0];
+	protected PinOutput out[] = new PinOutput[0];
 	
 	protected Node(){
 		initInputs();
 		initOutputs();
+		for(PinOutput pin:out){pin.initialize();}
 	}
 	
 	public abstract Node run();

@@ -38,5 +38,10 @@ public class PinValueIn<Type> extends PinBaseImp implements PinInput, PinValue<T
 	public Class<Type> getType() {
 		return type;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <Type> Type getValue(PinValue<?> in){
+		return (Type)in.getValue();
+	}
 
 }
