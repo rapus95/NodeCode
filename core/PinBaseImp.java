@@ -12,12 +12,10 @@ public abstract class PinBaseImp implements PinBase {
 		BLACK(0, 0, 0),
 		;
 		
-		public final byte r, g, b;
+		public final int rgb;
 		
 		private COLOR(int r, int g, int b){
-			this.r = (byte)r;
-			this.g = (byte)g;
-			this.b = (byte)b;
+			rgb = (r&0xFF)<<16 | (g&0xFF)<<8 | (b&0xFF);
 		}
 	}
 	
