@@ -1,11 +1,13 @@
 package core;
 
+
 public class PinValueIn<Type> extends PinBaseImp implements PinInput, PinValue<Type> {
 
 	private final Class<Type> type;
 	private PinOutput origin=null;
 	
-	public PinValueIn(Class<Type> type){
+	public PinValueIn(Node parent, String name, Class<Type> type){
+		super(parent, name);
 		this.type = type;
 	}
 
@@ -14,6 +16,12 @@ public class PinValueIn<Type> extends PinBaseImp implements PinInput, PinValue<T
 		if(origin instanceof PinValue && this.getType()==((PinValue<?>)origin).getType()){
 			this.origin = origin;
 		}
+	}
+
+	@Override
+	public void removeOriginUnchecked(PinOutput origin) {
+		if(this.origin==origin)
+			origin=null;
 	}
 
 	@Override

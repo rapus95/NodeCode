@@ -1,7 +1,13 @@
 package core;
 
 
+
 public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
+
+	public PinProgramOut(Node parent, String name) {
+		super(parent, name);
+		color = COLOR.RED;
+	}
 
 	private PinProgramIn target = null;
 
@@ -14,6 +20,12 @@ public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
 	
 	public void setTarget(PinProgramIn target) {
 		this.target = target;
+	}
+
+	@Override
+	public void removeTargetUnchecked(PinInput target) {
+		if(this.target==target)
+			target=null;
 	}
 
 	@Override

@@ -1,23 +1,22 @@
 package core;
 
 
+
 public class PinProgramIn extends PinBaseImp implements PinInput, PinProgram {
 
-	private PinProgramOut origin=null;
+	public PinProgramIn(Node parent, String name) {
+		super(parent, name);
+		color = COLOR.RED;
+	}
 
 	@Override
-	public void setOriginUnchecked(PinOutput origin) {
-		if(origin instanceof PinProgram){
-			setOrigin((PinProgramOut) origin);
-		}
-	}
-	
-	public void setOrigin(PinProgramOut origin) {
-		this.origin = origin;
-	}
+	public void setOriginUnchecked(PinOutput origin) {}
 
-	public PinProgramOut getOrigin() {
-		return origin;
+	@Override
+	public void removeOriginUnchecked(PinOutput origin) {}
+
+	public PinOutput getOrigin() {
+		return null;
 	}
 
 }

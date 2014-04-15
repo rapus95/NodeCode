@@ -1,8 +1,11 @@
 package core;
 
+import core.PinBaseImp.COLOR;
+
 public interface PinBase {
 
-	public void setParent(Node n);
 	public Node getNode();
+	public String getName();
+	public COLOR getColor();
 
 }

@@ -1,5 +1,6 @@
 package type;
 
+import core.Node;
 import core.PinBaseImp;
 import core.PinInput;
 import core.PinOutput;
@@ -7,6 +8,10 @@ import core.PinValue;
 import core.PinValueIn;
 
 public class PinNumber extends PinBaseImp implements PinOutput, PinValue<Number> {
+
+	public PinNumber(Node parent, String name) {
+		super(parent, name);
+	}
 
 	private PinValueIn<PinNumber> target;
 	private int i=0;
@@ -23,6 +28,13 @@ public class PinNumber extends PinBaseImp implements PinOutput, PinValue<Number>
 		this.target = target;
 	}
 
+	@Override
+	public void removeTargetUnchecked(PinInput target) {
+		if(this.target==target)
+			target=null;
+	}
+
+	@Override
 	public PinValueIn<PinNumber> getTarget() {
 		return target;
 	}

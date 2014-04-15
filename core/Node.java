@@ -12,4 +12,5 @@ public abstract class Node {
 	public abstract Node run();
 	public abstract void initInputs();
 	public abstract void initOutputs();
+	public abstract String getName();
 }

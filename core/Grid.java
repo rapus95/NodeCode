@@ -13,6 +13,17 @@ public class Grid {
 		return false;
 	}
 	
+	public static boolean split(PinOutput out, PinInput in){
+		if(out instanceof PinProgram && in instanceof PinProgram
+		|| out instanceof PinValue && in instanceof PinValue && ((PinValue<?>) out).getType()==((PinValue<?>) in).getType()
+		){
+			out.removeTargetUnchecked(in);
+			in.removeOriginUnchecked(out);
+			return true;
+		}
+		return false;
+	}
+	
 	public void runProgram(Node start){
 		Node next=start;
 		while((next=next.run())!=null);
