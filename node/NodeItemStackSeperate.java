@@ -11,7 +11,8 @@ import core.PinValueOut;
 public class NodeItemStackSeperate extends Node {
 
 	@Override
-	public Node run() {
+	protected Node execute() {
+		isCalculated=true;
 		ItemStack itemStack = PinValueIn.getValue(getValIn(0));
 		getValOut(0).setValueUnchecked(itemStack);
 		getValOut(1).setValueUnchecked(itemStack.id);

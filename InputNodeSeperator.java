@@ -12,7 +12,8 @@ public class InputNodeSeperator extends Node {
 	int dir;
 	
 	@Override
-	public Node run() {
+	protected Node execute() {
+		isCalculated=true;
 		getValOut(0).setValueUnchecked(itemStack);
 		getValOut(1).setValueUnchecked(dir);
 		return getProgOut(0).getTarget().getNode();

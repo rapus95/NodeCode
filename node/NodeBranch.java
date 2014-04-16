@@ -10,7 +10,8 @@ import core.PinValueIn;
 public class NodeBranch extends Node {
 	
 	@Override
-	public Node run() {
+	protected Node execute() {
+		isCalculated=true;
 		PinValueIn<?> input1 = getValIn(0);
 		PinValueIn<?> input2 = getValIn(1);
 		int mode = ((SelectionData)getConfig(0).getData()).getValue();

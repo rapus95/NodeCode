@@ -9,7 +9,8 @@ public class OutputNodeSeperator extends Node {
 	int dir;
 	
 	@Override
-	public Node run() {
+	protected Node execute() {
+		isCalculated=true;
 		outputDirection[0] = PinValueIn.<Number>getValue(getValIn(0)).intValue();
 		outputDirection[1] = PinValueIn.<Number>getValue(getValIn(1)).intValue();
 		outputDirection[2] = PinValueIn.<Number>getValue(getValIn(2)).intValue();

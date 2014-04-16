@@ -9,6 +9,8 @@ public abstract class Node {
 	protected ArrayList<PinValueIn<?>> valIn = new ArrayList<PinValueIn<?>>();
 	protected ArrayList<PinValueOut<?>> valOut = new ArrayList<PinValueOut<?>>();
 	protected String name;
+	public boolean calcOnRequest=false;
+	public boolean isCalculated=false;
 	
 	protected Node(){
 		initInputs();
@@ -20,7 +22,13 @@ public abstract class Node {
 		name = getDefaultName();
 	}
 	
-	public abstract Node run();
+	public Node run(){
+		prepare();
+		isCalculated=true;
+		return execute();
+	}
+	
+	protected abstract Node execute();
 	public abstract void initInputs();
 	public abstract void initConfigs();
 	public abstract void initOutputs();
@@ -52,5 +60,26 @@ public abstract class Node {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public boolean isCalculated(){
+		return isCalculated;
+	}
+	
+	public boolean canBeCalcedOnRequest(){
+		return calcOnRequest;
+	}
+	
+	public void prepare(){
+		Node origin;
+		PinOutput out;
+		for(PinValueIn<?> pin:valIn){
+			if((out=pin.getOrigin())==null)
+				continue;
+			origin = out.getNode();
+			if((Grid.calculationMode || origin.canBeCalcedOnRequest()) && !origin.isCalculated()){
+				origin.run();
+			}
+		}
 	}
 }

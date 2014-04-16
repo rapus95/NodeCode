@@ -2,6 +2,8 @@ package core;
 
 public class Grid {
 	
+	public static boolean calculationMode=true;
+	
 	public static boolean connectProg(Node source, int indexOut, Node target){
 		return connect(true, source, indexOut, target, 0);
 	}
@@ -70,7 +72,7 @@ public class Grid {
 	public static Node runProgram(Node start){
 		Node next=start;
 		Node tmp;
-		while((tmp=next.run())!=null){next=tmp;};
+		while((tmp=next.execute())!=null){next=tmp;};
 		return next;
 	}
 }
