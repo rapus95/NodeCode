@@ -12,7 +12,7 @@ public class XMLNode {
 	
 	private HashMap<String, String> properties = new HashMap<String, String>();
 	
-	private List<XMLNode> childs = new ArrayList<XMLNode>();
+	private List<XMLNode> children = new ArrayList<XMLNode>();
 	
 	private String text = "";
 	
@@ -41,16 +41,16 @@ public class XMLNode {
 	}
 	
 	public void addChild(XMLNode child){
-		if(!this.childs.contains(child))
-			this.childs.add(child);
+		if(!this.children.contains(child))
+			this.children.add(child);
 	}
 	
-	public int getChildCount(){
-		return this.childs.size();
+	public int getChildrenAmount(){
+		return this.children.size();
 	}
 	
 	public XMLNode getChild(int i){
-		return this.childs.get(i);
+		return this.children.get(i);
 	}
 	
 	public String save(String ls){
@@ -58,12 +58,12 @@ public class XMLNode {
 		for(Entry<String, String> e:this.properties.entrySet()){
 			out += " "+e.getKey()+" = \""+e.getValue()+"\"";
 		}
-		if(this.childs.isEmpty() && this.text.trim().isEmpty()){
+		if(this.children.isEmpty() && this.text.trim().isEmpty()){
 			return out + "/>";
 		}
 		out += ">\n";
 		String ls2 = ls+"\t";
-		for(XMLNode child:this.childs){
+		for(XMLNode child:this.children){
 			out += child.save(ls2)+"\n";
 		}
 		if(!(this.text==null || this.text.trim().isEmpty())){

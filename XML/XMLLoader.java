@@ -1,6 +1,8 @@
 package XML;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -47,5 +49,14 @@ public class XMLLoader {
 		}
 		return node;
 	}
-	
+
+	public static void save(XMLNode n, String targetFile){
+		PrintWriter pw;
+		try {
+			pw = new PrintWriter(targetFile);
+			pw.write(n.save());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 }
