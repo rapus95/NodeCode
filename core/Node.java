@@ -11,8 +11,12 @@ public abstract class Node {
 	protected String name;
 	public boolean calcOnRequest=false;
 	protected boolean isCalculated=false;
+	protected float x, y;
 	
 	protected Node(){
+		this.x = 0;
+		this.y = 0;
+		Grid.current.registerNode(this);
 		initInputs();
 		initConfigs();
 		initOutputs();
@@ -77,7 +81,7 @@ public abstract class Node {
 			if((out=pin.getOrigin())==null)
 				continue;
 			origin = out.getNode();
-			if((Grid.calculationFlow || origin.canBeCalcedOnRequest()) && !origin.isCalculated()){
+			if((GridHelper.calculationFlow || origin.canBeCalcedOnRequest()) && !origin.isCalculated()){
 				origin.run();
 			}
 		}

@@ -1,7 +1,7 @@
 package node;
 
 import type.NumberData;
-import core.Grid;
+import core.GridHelper;
 import core.Node;
 import core.PinProgramOut;
 import core.PinValueIn;
@@ -16,7 +16,7 @@ public class NodeCountLoop extends Node {
 		double stepSize = PinValueIn.<Number>getValue(getValIn(2)).doubleValue();
 		for(double d=start; d<=end; d+=stepSize){
 			getValOut(0).setValueUnchecked(d);
-			Grid.runProgram(getProgOut(1).getTarget().getNode());
+			GridHelper.runProgram(getProgOut(1).getTarget().getNode());
 		}
 		return getProgOut(0).getTarget().getNode();
 	}
