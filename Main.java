@@ -15,8 +15,7 @@ public class Main {
 		NodeItemStackSeperate sep = new NodeItemStackSeperate();
 		NodeBranch branch = new NodeBranch();
 		SelectionData sd = (SelectionData)branch.getConfig(0).getData();
-		int i = sd.getIndexForString("Equal");
-		sd.setValue(i);
+		sd.setValueUnchecked(1);
 		OutputNodeSeperator out0 = new OutputNodeSeperator();
 		OutputNodeSeperator out1 = new OutputNodeSeperator();
 		in.setItemStack(new ItemStack(12, 13, 53));

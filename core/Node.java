@@ -10,7 +10,7 @@ public abstract class Node {
 	protected ArrayList<PinValueOut<?>> valOut = new ArrayList<PinValueOut<?>>();
 	protected String name;
 	public boolean calcOnRequest=false;
-	public boolean isCalculated=false;
+	protected boolean isCalculated=false;
 	
 	protected Node(){
 		initInputs();
@@ -77,9 +77,13 @@ public abstract class Node {
 			if((out=pin.getOrigin())==null)
 				continue;
 			origin = out.getNode();
-			if((Grid.calculationMode || origin.canBeCalcedOnRequest()) && !origin.isCalculated()){
+			if((Grid.calculationFlow || origin.canBeCalcedOnRequest()) && !origin.isCalculated()){
 				origin.run();
 			}
 		}
+	}
+	
+	public void toggleCalcOnRequest(){
+		calcOnRequest^=true;
 	}
 }

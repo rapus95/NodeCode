@@ -24,11 +24,21 @@ public class SelectionData implements ValueType<Integer> {
 
 	@Override
 	public Integer convert(Object o) {
-		return this.getType().cast(o);
+		if(o instanceof String){
+			return getIndexForString((String)o);
+		}
+		return ((Number)o).intValue();
+	}
+
+	@Override
+	public boolean canConvert(Class<?> other) {
+		return Number.class.isAssignableFrom(other) || other==String.class;
 	}
 
 	@Override
 	public void setValue(Integer dt) {
+		if(dt<0 || dt>options.length-1)
+			return;
 		selected = dt;
 	}
 
@@ -40,11 +50,6 @@ public class SelectionData implements ValueType<Integer> {
 	@Override
 	public boolean canHaveDirectInput() {
 		return true;
-	}
-
-	@Override
-	public boolean canConvert(Class<?> other) {
-		return this.getType().isAssignableFrom(other);
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package core;
 
 public class Grid {
 	
-	public static boolean calculationMode=true;
+	public static boolean calculationFlow=true;
 	
 	public static boolean connectProg(Node source, int indexOut, Node target){
 		return connect(true, source, indexOut, target, 0);
