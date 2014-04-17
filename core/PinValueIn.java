@@ -1,5 +1,6 @@
 package core;
 
+import XML.XMLNode;
 import core.ValueType.COLOR;
 
 
@@ -81,8 +82,34 @@ public class PinValueIn<Type> extends PinBaseImp implements PinInput, ValueHandl
 	}
 
 	@Override
+	public void reset() {}
+
+	@Override
 	public COLOR getColor() {
 		return data.getColor();
+	}
+	
+	@Override
+	public void saveTo(XMLNode node) {
+		XMLNode n = new XMLNode(name);
+		n.setProperty("type", "valIn");
+		n.setProperty("originNode", ""+(origin==null?-1:origin.getNode().getUniqueID()));
+		n.setProperty("originPin", ""+(origin==null?-1:origin.getName()));
+		data.saveTo(n);
+		node.addChild(n);
+	}
+
+	@Override
+	public void loadFrom(XMLNode node) {
+		XMLNode child;
+		for(int i=0; i<node.getChildrenAmount(); i++){
+			if(!((child=node.getChild(i)).getName().equalsIgnoreCase(name) && child.getProperty("type").equalsIgnoreCase("valIn")))
+				continue;
+			Node tmp = getNode().getGrid().getNodeByUniqueID(Integer.valueOf(child.getProperty("originNode")));
+			origin = tmp==null?null:tmp.getPinValOutByName(child.getProperty("originPin"));
+			data.loadFrom(child);
+			return;
+		}
 	}
 
 }

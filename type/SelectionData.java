@@ -1,5 +1,6 @@
 package type;
 
+import XML.XMLNode;
 import core.ValueType;
 
 public class SelectionData implements ValueType<Integer> {
@@ -76,6 +77,19 @@ public class SelectionData implements ValueType<Integer> {
 	@Override
 	public COLOR getColor() {
 		return COLOR.BLUE;
+	}
+
+	@Override
+	public void saveTo(XMLNode node) {
+		XMLNode own = new XMLNode("data");
+		own.setProperty("selected", ""+selected);
+		node.addChild(own);
+	}
+
+	@Override
+	public void loadFrom(XMLNode node) {
+		XMLNode own = node.getChildByName("data");
+		selected = Integer.valueOf(own.getProperty("selected"));
 	}
 
 }

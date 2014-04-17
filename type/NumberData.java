@@ -1,18 +1,19 @@
 package type;
 
+import XML.XMLNode;
 import core.ValueType;
 
 public class NumberData implements ValueType<Number>{
 	
-	private double i;
+	private double value;
 
 	public Number getValue() {
-		return i;
+		return value;
 	}
 
 	@Override
 	public void setValue(Number dt) {
-		this.i = dt.doubleValue();
+		this.value = dt.doubleValue();
 	}
 
 	@Override
@@ -43,11 +44,24 @@ public class NumberData implements ValueType<Number>{
 
 	@Override
 	public void init() {
-		i = 0;
+		value = 0;
 	}
 
 	@Override
 	public COLOR getColor() {
 		return COLOR.BLUE;
+	}
+
+	@Override
+	public void saveTo(XMLNode node) {
+		XMLNode own = new XMLNode("data");
+		own.setProperty("value", ""+value);
+		node.addChild(own);
+	}
+
+	@Override
+	public void loadFrom(XMLNode node) {
+		XMLNode own = node.getChildByName("data");
+		value = Double.valueOf(own.getProperty("value"));
 	}
 }

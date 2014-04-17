@@ -1,5 +1,6 @@
 package node;
 
+import XML.XMLNode;
 import type.NumberData;
 import type.SelectionData;
 import core.Config;
@@ -8,10 +9,10 @@ import core.PinProgramOut;
 import core.PinValueIn;
 
 public class NodeBranch extends Node {
+	public static final String defaultName = "BranchNode";
 	
 	@Override
 	protected Node execute() {
-		isCalculated=true;
 		PinValueIn<?> input1 = getValIn(0);
 		PinValueIn<?> input2 = getValIn(1);
 		int mode = ((SelectionData)getConfig(0).getData()).getValue();
@@ -40,8 +41,14 @@ public class NodeBranch extends Node {
 
 	@Override
 	public String getDefaultName() {
-		return "Branch Node";
+		return defaultName;
 	}
+
+	@Override
+	protected void saveTo(XMLNode node) {}
+
+	@Override
+	protected void loadFrom(XMLNode node) {}
 	
 	
 	

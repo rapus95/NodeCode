@@ -1,9 +1,12 @@
+package main;
+import XML.XMLNode;
 import type.NumberData;
 import core.Node;
 import core.PinValueIn;
 
 
 public class OutputNodeSeperator extends Node {
+	public static final String defaultName = "ReturnNode";
 
 	int outputDirection[] = new int[4];
 	int dir;
@@ -36,7 +39,7 @@ public class OutputNodeSeperator extends Node {
 
 	@Override
 	public String getDefaultName() {
-		return "Return Node";
+		return defaultName;
 	}
 	
 	public int[] getOutputDirection(){
@@ -46,5 +49,11 @@ public class OutputNodeSeperator extends Node {
 	public int getDirection(){
 		return dir;
 	}
+
+	@Override
+	protected void saveTo(XMLNode node) {}
+
+	@Override
+	protected void loadFrom(XMLNode node) {}
 
 }

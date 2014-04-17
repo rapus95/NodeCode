@@ -1,5 +1,6 @@
 package node;
 
+import XML.XMLNode;
 import type.NumberData;
 import core.GridHelper;
 import core.Node;
@@ -8,7 +9,8 @@ import core.PinValueIn;
 import core.PinValueOut;
 
 public class NodeCountLoop extends Node {
-
+	public static final String defaultName = "Loop";
+	
 	@Override
 	protected Node execute() {
 		double start = PinValueIn.<Number>getValue(getValIn(0)).doubleValue();
@@ -42,8 +44,13 @@ public class NodeCountLoop extends Node {
 
 	@Override
 	public String getDefaultName() {
-		// TODO Auto-generated method stub
-		return null;
+		return defaultName;
 	}
+
+	@Override
+	protected void saveTo(XMLNode node) {}
+
+	@Override
+	protected void loadFrom(XMLNode node) {}
 
 }

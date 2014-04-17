@@ -1,5 +1,6 @@
 package core;
 
+import XML.XMLNode;
 import core.ValueType.COLOR;
 
 
@@ -58,8 +59,19 @@ public class PinValueOut<Type> extends PinBaseImp implements PinOutput, ValueHan
 	}
 
 	@Override
+	public void reset() {
+		data.init();
+	}
+
+	@Override
 	public COLOR getColor() {
 		return data.getColor();
 	}
+	
+	@Override
+	public void saveTo(XMLNode node) {}
+
+	@Override
+	public void loadFrom(XMLNode node) {}
 
 }

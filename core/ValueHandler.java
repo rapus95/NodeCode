@@ -6,5 +6,4 @@ public interface ValueHandler<Type> {
 	public ValueType<Type> getData();
 	public Type getValue();
 	public void setValueUnchecked(Object t);
-	public void init();
 }

@@ -1,3 +1,5 @@
+package main;
+import XML.XMLNode;
 import type.ItemStack;
 import type.ItemStackData;
 import type.NumberData;
@@ -7,6 +9,7 @@ import core.PinValueOut;
 
 
 public class InputNodeSeperator extends Node {
+	public static final String defaultName = "InputNode";
 
 	ItemStack itemStack = new ItemStack(0, 0, 0);
 	int dir;
@@ -34,7 +37,7 @@ public class InputNodeSeperator extends Node {
 
 	@Override
 	public String getDefaultName() {
-		return "Input Node";
+		return defaultName;
 	}
 	
 	public void setItemStack(ItemStack is){
@@ -43,6 +46,18 @@ public class InputNodeSeperator extends Node {
 	
 	public void setDirection(int i){
 		dir = i;
+	}
+
+	@Override
+	protected void saveTo(XMLNode node) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void loadFrom(XMLNode node) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

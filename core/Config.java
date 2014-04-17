@@ -1,8 +1,10 @@
 package core;
 
+import XML.XMLNode;
+
 public class Config<Type> implements NodeComponent, ValueHandler<Type>{
 	private ValueType<Type> data;
-	private String name;
+	private final String name;
 	private final Node parent;
 	
 	public Config(String name, Node parent, ValueType<Type> data){
@@ -43,6 +45,28 @@ public class Config<Type> implements NodeComponent, ValueHandler<Type>{
 			return;
 		}
 		throw new RuntimeException("WRONG TYPE!!");
+	}
+
+	@Override
+	public void reset() {}
+
+	@Override
+	public void saveTo(XMLNode node) {
+		XMLNode n = new XMLNode(name);
+		n.setProperty("type", "config");
+		data.saveTo(n);
+		node.addChild(n);
+	}
+
+	@Override
+	public void loadFrom(XMLNode node) {
+		XMLNode child;
+		for(int i=0; i<node.getChildrenAmount(); i++){
+			if(!((child=node.getChild(i)).getName().equalsIgnoreCase(name) && child.getProperty("type").equalsIgnoreCase("config")))
+				continue;
+			data.loadFrom(child);
+			return;
+		}
 	}
 
 	@Override

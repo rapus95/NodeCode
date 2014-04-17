@@ -1,5 +1,6 @@
 package type;
 
+import XML.XMLNode;
 import core.ValueType;
 
 public class ItemStackData implements ValueType<ItemStack> {
@@ -52,6 +53,23 @@ public class ItemStackData implements ValueType<ItemStack> {
 	@Override
 	public COLOR getColor() {
 		return COLOR.BLACK;
+	}
+
+	@Override
+	public void saveTo(XMLNode node) {
+		XMLNode own = new XMLNode("data");
+		own.setProperty("id", ""+is.id);
+		own.setProperty("meta", ""+is.meta);
+		own.setProperty("stackSize", ""+is.stacksize);
+		node.addChild(own);
+	}
+
+	@Override
+	public void loadFrom(XMLNode node) {
+		XMLNode own = node.getChildByName("data");
+		is = new ItemStack(Integer.valueOf(own.getProperty("id")),
+				Integer.valueOf(own.getProperty("meta")),
+				Integer.valueOf(own.getProperty("stackSize")));
 	}
 
 }

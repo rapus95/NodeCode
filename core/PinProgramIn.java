@@ -1,5 +1,6 @@
 package core;
 
+import XML.XMLNode;
 import core.ValueType.COLOR;
 
 
@@ -29,5 +30,17 @@ public class PinProgramIn extends PinBaseImp implements PinInput, PinProgram {
 	public COLOR getColor() {
 		return COLOR.RED;
 	}
+
+	@Override
+	public void saveTo(XMLNode node) {}
+
+	@Override
+	public void loadFrom(XMLNode node) {}
+
+	@Override
+	public void init() {}
+
+	@Override
+	public void reset() {}
 
 }

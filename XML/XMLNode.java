@@ -53,6 +53,14 @@ public class XMLNode {
 		return this.children.get(i);
 	}
 	
+	public XMLNode getChildByName(String searchName){
+		for(XMLNode child:children){
+			if(child.getName().equalsIgnoreCase(searchName))
+				return child;
+		}
+		return null;
+	}
+	
 	public String save(String ls){
 		String out = ls + "<"+this.name;
 		for(Entry<String, String> e:this.properties.entrySet()){

@@ -1,5 +1,6 @@
 package node;
 
+import XML.XMLNode;
 import type.ItemStack;
 import type.ItemStackData;
 import type.NumberData;
@@ -9,10 +10,10 @@ import core.PinValueIn;
 import core.PinValueOut;
 
 public class NodeItemStackSeperate extends Node {
+	public static final String defaultName = "ItemStackSeperator";
 
 	@Override
 	protected Node execute() {
-		isCalculated=true;
 		ItemStack itemStack = PinValueIn.getValue(getValIn(0));
 		getValOut(0).setValueUnchecked(itemStack);
 		getValOut(1).setValueUnchecked(itemStack.id);
@@ -40,7 +41,13 @@ public class NodeItemStackSeperate extends Node {
 
 	@Override
 	public String getDefaultName() {
-		return "ItemStack Seperator";
+		return defaultName;
 	}
+
+	@Override
+	protected void saveTo(XMLNode node) {}
+
+	@Override
+	protected void loadFrom(XMLNode node) {}
 
 }

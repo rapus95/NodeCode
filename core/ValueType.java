@@ -1,5 +1,7 @@
 package core;
 
+import XML.XMLNode;
+
 public interface ValueType<DataType> {
 	public DataType getValue();
 	public void setValueUnchecked(Object o);
@@ -10,6 +12,8 @@ public interface ValueType<DataType> {
 	public boolean canHaveDirectInput();
 	public boolean canConvert(Class<?> other);
 	public COLOR getColor();
+	public abstract void saveTo(XMLNode node);
+	public abstract void loadFrom(XMLNode node);
 	
 	public static enum COLOR{
 		WHITE(255, 255, 255),
