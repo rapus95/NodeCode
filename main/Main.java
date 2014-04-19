@@ -5,7 +5,6 @@ import node.NodeBranch;
 import node.NodeItemStackSeperate;
 import type.ItemStack;
 import type.SelectionData;
-import XML.XMLNode;
 import core.Grid;
 import core.GridHelper;
 import core.Node;
@@ -36,21 +35,27 @@ public class Main {
 		GridHelper.setValue(out1, 3, 12);
 		GridHelper.connectVal(in, 1, out0, 4);
 		GridHelper.connectVal(in, 1, out1, 4);
+		long l = System.nanoTime();
+		System.out.println(l);
 		Node last = GridHelper.runProgram(in);
+		System.out.println((-l+(l=System.nanoTime()))/1000000D);
+		Grid.getCurrent().reset();
+		l = System.nanoTime();
+		last = GridHelper.runProgram(in);
+		System.out.println((-l+(l=System.nanoTime()))/1000000D);
+		Grid.getCurrent().reset();
+		l = System.nanoTime();
+		last = GridHelper.runProgram(in);
+		System.out.println((-l+(l=System.nanoTime()))/1000000D);
+		Grid.getCurrent().reset();
+		l = System.nanoTime();
+		last = GridHelper.runProgram(in);
+		System.out.println((-l+(l=System.nanoTime()))/1000000D);
 		if(last instanceof OutputNodeSeperator){
 			OutputNodeSeperator on = (OutputNodeSeperator) last;
 			System.out.println("dir: " + on.getDirection());
 			System.out.println("out: " + Arrays.toString(on.getOutputDirection()));
 		}
-		XMLNode save1 = new XMLNode("Grid1"), save2 = new XMLNode("GridNeu");
-		Grid.getCurrent().saveTo(save1);
-		Grid.setCurrent(new Grid());
-		Grid.getCurrent().loadFrom(save1);
-		Grid.getCurrent().saveTo(save2);
-		String t1 = save1.save(), t2 = save2.save();
-		System.out.println("Out1:"+t1);
-		System.out.println("Out2:"+t2);
-		System.out.println(t1.equals(t2));
 	}
 
 }

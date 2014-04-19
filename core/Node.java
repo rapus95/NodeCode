@@ -39,7 +39,8 @@ public abstract class Node {
 	public Node run(){
 		prepare();
 		isCalculated=true;
-		return execute();
+		PinBase pb = execute();
+		return pb==null?null:pb.getNode();
 	}
 	
 	public void reset(){
@@ -72,7 +73,7 @@ public abstract class Node {
 		for(NodeComponent pin:valOut){pin.loadFrom(own);}
 	}
 	
-	protected abstract Node execute();
+	protected abstract PinBase execute();
 	public abstract void initInputs();
 	public abstract void initConfigs();
 	public abstract void initOutputs();

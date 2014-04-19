@@ -5,6 +5,7 @@ import type.ItemStack;
 import type.ItemStackData;
 import type.NumberData;
 import core.Node;
+import core.PinBase;
 import core.PinProgramOut;
 import core.PinValueIn;
 import core.PinValueOut;
@@ -13,13 +14,13 @@ public class NodeItemStackSeperate extends Node {
 	public static final String defaultName = "ItemStackSeperator";
 
 	@Override
-	protected Node execute() {
+	protected PinBase execute() {
 		ItemStack itemStack = PinValueIn.getValue(getValIn(0));
 		getValOut(0).setValueUnchecked(itemStack);
 		getValOut(1).setValueUnchecked(itemStack.id);
 		getValOut(2).setValueUnchecked(itemStack.meta);
 		getValOut(3).setValueUnchecked(itemStack.stacksize);
-		return getProgOut(0).getTarget().getNode();
+		return getProgOut(0).getTarget();
 	}
 
 	@Override

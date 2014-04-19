@@ -53,5 +53,18 @@ public class Grid {
 	public static void setCurrent(Grid grid) {
 		current = grid;
 	}
+	
+	public void reset(){
+		for(int i=0; i<nodes.size(); i++){
+			nodes.get(i).reset();
+		}
+	}
+	
+	public static Node runProgram(Node start){
+		Node next=start;
+		Node tmp;
+		while((tmp=next.run())!=null){next=tmp;};
+		return next;
+	}
 
 }

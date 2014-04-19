@@ -4,6 +4,7 @@ import type.ItemStack;
 import type.ItemStackData;
 import type.NumberData;
 import core.Node;
+import core.PinBase;
 import core.PinProgramOut;
 import core.PinValueOut;
 
@@ -15,11 +16,11 @@ public class InputNodeSeperator extends Node {
 	int dir;
 	
 	@Override
-	protected Node execute() {
+	protected PinBase execute() {
 		isCalculated=true;
 		getValOut(0).setValueUnchecked(itemStack);
 		getValOut(1).setValueUnchecked(dir);
-		return getProgOut(0).getTarget().getNode();
+		return getProgOut(0).getTarget();
 	}
 
 	@Override

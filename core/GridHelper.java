@@ -72,7 +72,7 @@ public class GridHelper {
 	public static Node runProgram(Node start){
 		Node next=start;
 		Node tmp;
-		while((tmp=next.execute())!=null){next=tmp;};
+		while((tmp=next.run())!=null){next=tmp;};
 		return next;
 	}
 }

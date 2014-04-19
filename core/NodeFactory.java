@@ -4,7 +4,9 @@ import main.InputNodeSeperator;
 import main.OutputNodeSeperator;
 import node.NodeBranch;
 import node.NodeCountLoop;
+import node.NodeItemCompareOutCount;
 import node.NodeItemStackSeperate;
+import node.NodeMaths;
 
 public class NodeFactory {
 
@@ -15,6 +17,13 @@ public class NodeFactory {
 			return new NodeCountLoop();
 		else if(type.equalsIgnoreCase(NodeItemStackSeperate.defaultName))
 			return new NodeItemStackSeperate();
+		else if (type.equalsIgnoreCase(NodeItemCompareOutCount.defaultName))
+			return new NodeItemCompareOutCount();
+		else if (type.equalsIgnoreCase(NodeMaths.defaultName))
+			return new NodeMaths();
+		
+		
+		
 		else if (type.equalsIgnoreCase(InputNodeSeperator.defaultName))
 			return new InputNodeSeperator();
 		else if (type.equalsIgnoreCase(OutputNodeSeperator.defaultName))

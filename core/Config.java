@@ -7,7 +7,7 @@ public class Config<Type> implements NodeComponent, ValueHandler<Type>{
 	private final String name;
 	private final Node parent;
 	
-	public Config(String name, Node parent, ValueType<Type> data){
+	public Config(Node parent, String name, ValueType<Type> data){
 		this.name = name;
 		this.parent = parent;
 		this.data = data;

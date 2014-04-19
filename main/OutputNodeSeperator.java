@@ -2,6 +2,7 @@ package main;
 import XML.XMLNode;
 import type.NumberData;
 import core.Node;
+import core.PinBase;
 import core.PinValueIn;
 
 
@@ -12,7 +13,7 @@ public class OutputNodeSeperator extends Node {
 	int dir;
 	
 	@Override
-	protected Node execute() {
+	protected PinBase execute() {
 		isCalculated=true;
 		outputDirection[0] = PinValueIn.<Number>getValue(getValIn(0)).intValue();
 		outputDirection[1] = PinValueIn.<Number>getValue(getValIn(1)).intValue();

@@ -4,6 +4,7 @@ import XML.XMLNode;
 import type.NumberData;
 import core.GridHelper;
 import core.Node;
+import core.PinBase;
 import core.PinProgramOut;
 import core.PinValueIn;
 import core.PinValueOut;
@@ -12,7 +13,7 @@ public class NodeCountLoop extends Node {
 	public static final String defaultName = "Loop";
 	
 	@Override
-	protected Node execute() {
+	protected PinBase execute() {
 		double start = PinValueIn.<Number>getValue(getValIn(0)).doubleValue();
 		double end = PinValueIn.<Number>getValue(getValIn(1)).doubleValue();
 		double stepSize = PinValueIn.<Number>getValue(getValIn(2)).doubleValue();
@@ -20,7 +21,7 @@ public class NodeCountLoop extends Node {
 			getValOut(0).setValueUnchecked(d);
 			GridHelper.runProgram(getProgOut(1).getTarget().getNode());
 		}
-		return getProgOut(0).getTarget().getNode();
+		return getProgOut(0).getTarget();
 	}
 
 	@Override
