@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import XML.XMLNode;
 
 public abstract class Node {
-	protected PinProgramIn progIn = new PinProgramIn(this, "ProgIn");
-	protected ArrayList<PinProgramOut> progOut = new ArrayList<PinProgramOut>();
-	protected ArrayList<Config<?>> configs = new ArrayList<Config<?>>();
-	protected ArrayList<PinValueIn<?>> valIn = new ArrayList<PinValueIn<?>>();
-	protected ArrayList<PinValueOut<?>> valOut = new ArrayList<PinValueOut<?>>();
+	private PinProgramIn progIn = new PinProgramIn(this, "ProgIn");
+	private ArrayList<PinProgramOut> progOut = new ArrayList<PinProgramOut>();
+	private ArrayList<Config<?>> configs = new ArrayList<Config<?>>();
+	private ArrayList<PinValueIn<?>> valIn = new ArrayList<PinValueIn<?>>();
+	private ArrayList<PinValueOut<?>> valOut = new ArrayList<PinValueOut<?>>();
 	protected String name;
 	public boolean calcOnRequest=false;
 	protected boolean isCalculated=false;
@@ -23,9 +23,9 @@ public abstract class Node {
 		this.y = 0;
 		grid = Grid.getCurrent();
 		uniqueID = grid.registerNode(this);
-		initInputs();
-		initConfigs();
-		initOutputs();
+		initInputs(progIn, valIn);
+		initConfigs(configs);
+		initOutputs(progOut, valOut);
 		for(PinValueIn<?> pin:valIn){pin.init();}
 		for(Config<?> conf:configs){conf.init();}
 		for(PinValueOut<?> pin:valOut){pin.init();}
@@ -74,9 +74,9 @@ public abstract class Node {
 	}
 	
 	protected abstract PinBase execute();
-	public abstract void initInputs();
-	public abstract void initConfigs();
-	public abstract void initOutputs();
+	public abstract void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn);
+	public abstract void initConfigs(ArrayList<Config<?>> configs);
+	public abstract void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut);
 	public abstract String getDefaultName();
 	protected abstract void saveTo(XMLNode node);
 	protected abstract void loadFrom(XMLNode node);
@@ -93,12 +93,24 @@ public abstract class Node {
 		return valIn.get(index);
 	}
 	
+	public int getAmountOfValIn(){
+		return valIn.size();
+	}
+	
 	public ValueHandler<?> getConfig(int index){
 		return configs.get(index);
 	}
 	
+	public int getAmountOfConfigs(){
+		return configs.size();
+	}
+	
 	public PinValueOut<?> getValOut(int index){
 		return valOut.get(index);
+	}
+	
+	public int getAmountOfValOut(){
+		return valOut.size();
 	}
 	
 	public void setName(String name){

@@ -1,10 +1,14 @@
 package node;
 
+import java.util.ArrayList;
+
 import XML.XMLNode;
 import type.NumberData;
+import core.Config;
 import core.GridHelper;
 import core.Node;
 import core.PinBase;
+import core.PinProgramIn;
 import core.PinProgramOut;
 import core.PinValueIn;
 import core.PinValueOut;
@@ -25,19 +29,19 @@ public class NodeCountLoop extends Node {
 	}
 
 	@Override
-	public void initInputs() {
+	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<Number>(this, "start", new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "last", new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "stepSize", new NumberData()));
 	}
 
 	@Override
-	public void initConfigs() {
+	public void initConfigs(ArrayList<Config<?>> configs) {
 		
 	}
 
 	@Override
-	public void initOutputs() {
+	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
 		progOut.add(new PinProgramOut(this, "progOut"));
 		progOut.add(new PinProgramOut(this, "loop"));
 		valOut.add(new PinValueOut<Number>(this, "counter", new NumberData()));

@@ -1,13 +1,17 @@
 package node;
 
+import java.util.ArrayList;
+
 import XML.XMLNode;
 import type.NumberData;
 import type.SelectionData;
 import core.Config;
 import core.Node;
 import core.PinBase;
+import core.PinProgramIn;
 import core.PinProgramOut;
 import core.PinValueIn;
+import core.PinValueOut;
 
 public class NodeBranch extends Node {
 	public static final String defaultName = "BranchNode";
@@ -24,18 +28,18 @@ public class NodeBranch extends Node {
 	}
 
 	@Override
-	public void initInputs() {
+	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<Number>(this, "in1", new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "in2", new NumberData()));
 	}
 
 	@Override
-	public void initConfigs() {
+	public void initConfigs(ArrayList<Config<?>> configs) {
 		configs.add(new Config<Integer>(this, "Mode", new SelectionData(new String[]{"Equal", "Not Equal"})));
 	}
 
 	@Override
-	public void initOutputs() {
+	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
 		progOut.add(new PinProgramOut(this, "equal"));
 		progOut.add(new PinProgramOut(this, "unequal"));
 	}

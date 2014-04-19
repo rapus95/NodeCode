@@ -1,11 +1,15 @@
 package node;
 
+import java.util.ArrayList;
+
 import XML.XMLNode;
 import type.ItemStack;
 import type.ItemStackData;
 import type.NumberData;
+import core.Config;
 import core.Node;
 import core.PinBase;
+import core.PinProgramIn;
 import core.PinProgramOut;
 import core.PinValueIn;
 import core.PinValueOut;
@@ -24,15 +28,15 @@ public class NodeItemStackSeperate extends Node {
 	}
 
 	@Override
-	public void initInputs() {
+	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<ItemStack>(this, "itemStack", new ItemStackData())); 
 	}
 
 	@Override
-	public void initConfigs() {}
+	public void initConfigs(ArrayList<Config<?>> configs) {}
 
 	@Override
-	public void initOutputs() {
+	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
 		progOut.add(new PinProgramOut(this, "ProgOut"));
 		valOut.add(new PinValueOut<ItemStack>(this, "itemRef", new ItemStackData()));
 		valOut.add(new PinValueOut<Number>(this, "itemID", new NumberData()));

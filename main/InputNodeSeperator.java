@@ -1,11 +1,16 @@
 package main;
-import XML.XMLNode;
+import java.util.ArrayList;
+
 import type.ItemStack;
 import type.ItemStackData;
 import type.NumberData;
+import XML.XMLNode;
+import core.Config;
 import core.Node;
 import core.PinBase;
+import core.PinProgramIn;
 import core.PinProgramOut;
+import core.PinValueIn;
 import core.PinValueOut;
 
 
@@ -24,13 +29,13 @@ public class InputNodeSeperator extends Node {
 	}
 
 	@Override
-	public void initInputs() {}
+	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {}
 
 	@Override
-	public void initConfigs() {}
+	public void initConfigs(ArrayList<Config<?>> configs) {}
 
 	@Override
-	public void initOutputs() {
+	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
 		progOut.add(new PinProgramOut(this, "ProgOut"));
 		valOut.add(new PinValueOut<ItemStack>(this, "itemStack", new ItemStackData()));
 		valOut.add(new PinValueOut<Number>(this, "dir", new NumberData()));

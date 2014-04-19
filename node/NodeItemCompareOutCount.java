@@ -1,5 +1,7 @@
 package node;
 
+import java.util.ArrayList;
+
 import type.ItemStack;
 import type.ItemStackData;
 import type.NumberData;
@@ -7,6 +9,7 @@ import XML.XMLNode;
 import core.Config;
 import core.Node;
 import core.PinBase;
+import core.PinProgramIn;
 import core.PinProgramOut;
 import core.PinValueIn;
 import core.PinValueOut;
@@ -16,32 +19,32 @@ public class NodeItemCompareOutCount extends Node {
 
 	@Override
 	protected PinBase execute() {
-		ItemStack is = PinValueIn.getValue(valIn.get(0));
+		ItemStack is = PinValueIn.getValue(getValIn(0));
 		ItemStack tmp;
-		for(int i=0; i<configs.size(); i++){
-			tmp = PinValueIn.getValue(configs.get(i));
+		for(int i=0; i<getAmountOfConfigs(); i++){
+			tmp = PinValueIn.getValue(getConfig(i));
 			if(tmp==null)
 				continue;
 			if(is.id==tmp.id && is.meta==tmp.meta)
-				valOut.get(0).setValueUnchecked(tmp.stacksize);
+				getValOut(0).setValueUnchecked(tmp.stacksize);
 		}
-		return progOut.get(0).getTarget();
+		return getProgOut(0).getTarget();
 	}
 
 	@Override
-	public void initInputs() {
+	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<ItemStack>(this, "itemStack", new ItemStackData()));
 	}
 
 	@Override
-	public void initConfigs() {
+	public void initConfigs(ArrayList<Config<?>> configs) {
 		for(int i=0; i<9; i++){
 			configs.add(new Config<ItemStack>(this, "item"+(i+1), new ItemStackData()));
 		}
 	}
 
 	@Override
-	public void initOutputs() {
+	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
 		progOut.add(new PinProgramOut(this, "progOut"));
 		valOut.add(new PinValueOut<Number>(this, "amount", new NumberData()));
 	}
