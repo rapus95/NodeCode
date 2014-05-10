@@ -1,6 +1,6 @@
-package core;
+package libraries.nodecode.core;
 
-import XML.XMLNode;
+import libraries.nodecode.XML.XMLNode;
 
 public interface NodeComponent {
 

@@ -1,8 +1,8 @@
-package core;
+package libraries.nodecode.core;
 
 import java.util.ArrayList;
 
-import XML.XMLNode;
+import libraries.nodecode.XML.XMLNode;
 
 public class Grid {
 	private static Grid current = new Grid();

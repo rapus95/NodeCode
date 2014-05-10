@@ -1,4 +1,4 @@
-package XML;
+package libraries.nodecode.XML;
 
 
 public class ParserException extends Exception {

@@ -1,8 +1,8 @@
-package main;
-import core.Grid;
-import core.GridHelper;
-import node.NodeMaths;
-import XML.XMLNode;
+package libraries.nodecode.main;
+import libraries.nodecode.XML.XMLNode;
+import libraries.nodecode.core.Grid;
+import libraries.nodecode.core.GridHelper;
+import libraries.nodecode.node.NodeMaths;
 
 
 public class Main {

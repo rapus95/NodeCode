@@ -1,13 +1,13 @@
-package core;
+package libraries.nodecode.core;
 
-import XML.XMLNode;
-import main.InputNodeSeperator;
-import main.OutputNodeSeperator;
-import node.NodeBranch;
-import node.NodeCountLoop;
-import node.NodeItemCompareOutCount;
-import node.NodeItemStackSeperate;
-import node.NodeMaths;
+import libraries.nodecode.XML.XMLNode;
+import libraries.nodecode.main.InputNodeSeperator;
+import libraries.nodecode.main.OutputNodeSeperator;
+import libraries.nodecode.node.NodeBranch;
+import libraries.nodecode.node.NodeCountLoop;
+import libraries.nodecode.node.NodeItemCompareOutCount;
+import libraries.nodecode.node.NodeItemStackSeperate;
+import libraries.nodecode.node.NodeMaths;
 
 public class NodeFactory {
 

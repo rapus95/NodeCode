@@ -1,19 +1,19 @@
-package node;
+package libraries.nodecode.node;
 
 import java.util.ArrayList;
 
-import type.ItemStack;
-import type.ItemStackData;
-import type.NumberData;
-import XML.XMLNode;
-import core.Config;
-import core.Helper;
-import core.Node;
-import core.PinBase;
-import core.PinProgramIn;
-import core.PinProgramOut;
-import core.PinValueIn;
-import core.PinValueOut;
+import libraries.nodecode.XML.XMLNode;
+import libraries.nodecode.core.Config;
+import libraries.nodecode.core.Helper;
+import libraries.nodecode.core.Node;
+import libraries.nodecode.core.PinBase;
+import libraries.nodecode.core.PinProgramIn;
+import libraries.nodecode.core.PinProgramOut;
+import libraries.nodecode.core.PinValueIn;
+import libraries.nodecode.core.PinValueOut;
+import libraries.nodecode.type.ItemStack;
+import libraries.nodecode.type.ItemStackData;
+import libraries.nodecode.type.NumberData;
 
 public class NodeItemStackSeperate extends Node {
 	public static final String defaultName = "ItemStackSeperator";
