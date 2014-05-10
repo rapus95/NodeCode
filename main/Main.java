@@ -18,8 +18,8 @@ public class Main {
 		XMLNode t = new XMLNode("test");
 		Grid.getCurrent().saveTo(t);
 		System.out.println(t);
-		String out = new PC_NodeToMiniscriptConverter().makeCode(t);
-		System.out.println(out);
+		//String out = new PC_NodeToMiniscriptConverter().makeCode(t);
+		//System.out.println(out);
 		return;
 	}
 
