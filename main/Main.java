@@ -56,7 +56,7 @@ public class Main {
 		last = GridHelper.runProgram(in);
 		System.out.println((-l+(l=System.nanoTime()))/1000000D);
 		Grid.getCurrent().reset();
-		l = System.nanoTime();
+		l = System.nanoTime()+1;
 		last = GridHelper.runProgram(in);
 		System.out.println((-l+(l=System.nanoTime()))/1000000D);
 		if(last instanceof OutputNodeSeperator){
