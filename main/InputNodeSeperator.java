@@ -36,9 +36,9 @@ public class InputNodeSeperator extends Node {
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "ProgOut"));
-		valOut.add(new PinValueOut<ItemStack>(this, "itemStack", new ItemStackData()));
-		valOut.add(new PinValueOut<Number>(this, "dir", new NumberData()));
+		progOut.add(new PinProgramOut(this, "ProgOut", 0));
+		valOut.add(new PinValueOut<ItemStack>(this, "itemStack", 0, new ItemStackData()));
+		valOut.add(new PinValueOut<Number>(this, "dir", 1, new NumberData()));
 	}
 
 	@Override
@@ -64,6 +64,11 @@ public class InputNodeSeperator extends Node {
 	protected void loadFrom(XMLNode node) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public IPOType getIPOType() {
+		return IPOType.INPUT;
 	}
 
 }

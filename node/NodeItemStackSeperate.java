@@ -2,11 +2,12 @@ package node;
 
 import java.util.ArrayList;
 
-import XML.XMLNode;
 import type.ItemStack;
 import type.ItemStackData;
 import type.NumberData;
+import XML.XMLNode;
 import core.Config;
+import core.Helper;
 import core.Node;
 import core.PinBase;
 import core.PinProgramIn;
@@ -19,7 +20,7 @@ public class NodeItemStackSeperate extends Node {
 
 	@Override
 	protected PinBase execute() {
-		ItemStack itemStack = PinValueIn.getValue(getValIn(0));
+		ItemStack itemStack = Helper.getValue(getValIn(0));
 		getValOut(0).setValueUnchecked(itemStack);
 		getValOut(1).setValueUnchecked(itemStack.id);
 		getValOut(2).setValueUnchecked(itemStack.meta);
@@ -29,7 +30,7 @@ public class NodeItemStackSeperate extends Node {
 
 	@Override
 	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
-		valIn.add(new PinValueIn<ItemStack>(this, "itemStack", new ItemStackData())); 
+		valIn.add(new PinValueIn<ItemStack>(this, "itemStack", 0, new ItemStackData())); 
 	}
 
 	@Override
@@ -37,11 +38,11 @@ public class NodeItemStackSeperate extends Node {
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "ProgOut"));
-		valOut.add(new PinValueOut<ItemStack>(this, "itemRef", new ItemStackData()));
-		valOut.add(new PinValueOut<Number>(this, "itemID", new NumberData()));
-		valOut.add(new PinValueOut<Number>(this, "meta", new NumberData()));
-		valOut.add(new PinValueOut<Number>(this, "stackSize", new NumberData()));
+		progOut.add(new PinProgramOut(this, "ProgOut", 0));
+		valOut.add(new PinValueOut<ItemStack>(this, "itemRef", 0, new ItemStackData()));
+		valOut.add(new PinValueOut<Number>(this, "itemID", 1, new NumberData()));
+		valOut.add(new PinValueOut<Number>(this, "meta", 2, new NumberData()));
+		valOut.add(new PinValueOut<Number>(this, "stackSize", 3, new NumberData()));
 	}
 
 	@Override
@@ -54,5 +55,10 @@ public class NodeItemStackSeperate extends Node {
 
 	@Override
 	protected void loadFrom(XMLNode node) {}
+
+	@Override
+	public IPOType getIPOType() {
+		return IPOType.PROCESS;
+	}
 
 }

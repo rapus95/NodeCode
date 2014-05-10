@@ -7,8 +7,8 @@ import core.ValueType.COLOR;
 
 public class PinProgramIn extends PinBaseImp implements PinInput, PinProgram {
 
-	public PinProgramIn(Node parent, String name) {
-		super(parent, name);
+	public PinProgramIn(Node parent, String name, int id) {
+		super(parent, name, id);
 	}
 
 	@Override

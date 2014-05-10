@@ -8,8 +8,10 @@ import core.ValueType.COLOR;
 
 public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
 
-	public PinProgramOut(Node parent, String name) {
-		super(parent, name);
+	public static final String XMLTypeName = "progOut";
+
+	public PinProgramOut(Node parent, String name, int id) {
+		super(parent, name, id);
 	}
 
 	private PinProgramIn target = null;
@@ -56,8 +58,8 @@ public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
 	
 	@Override
 	public void saveTo(XMLNode node) {
-		XMLNode n = new XMLNode(name);
-		n.setProperty("type", "progOut");
+		XMLNode n = new XMLNode(XMLTypeName);
+		n.setProperty("name", name);
 		n.setProperty("targetNode", ""+(target==null?-1:target.getNode().getUniqueID()));
 		n.setProperty("targetPin", ""+(target==null?"":target.getName()));
 		node.addChild(n);
@@ -65,9 +67,9 @@ public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
 
 	@Override
 	public void loadFrom(XMLNode node) {
-		XMLNode child;
-		for(int i=0; i<node.getChildrenAmount(); i++){
-			if(!((child=node.getChild(i)).getName().equalsIgnoreCase(name) && child.getProperty("type").equalsIgnoreCase("progOut")))
+		XMLNode[] children = node.getChildByName(XMLTypeName);
+		for(XMLNode child:children){
+			if(child.getProperty("name").equalsIgnoreCase(name))
 				continue;
 			Node tmp = getNode().getGrid().getNodeByUniqueID(Integer.valueOf(child.getProperty("targetNode")));
 			target = tmp==null?null:tmp.getPinProgInByName(child.getProperty("targetPin"));

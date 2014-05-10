@@ -3,14 +3,21 @@ package core;
 import XML.XMLNode;
 
 public class Config<Type> implements NodeComponent, ValueHandler<Type>{
+	public static final String XMLTypeName = "config";
 	private ValueType<Type> data;
 	private final String name;
 	private final Node parent;
+	private final int id;
 	
-	public Config(Node parent, String name, ValueType<Type> data){
+	public Config(Node parent, String name, int id, ValueType<Type> data){
 		this.name = name;
 		this.parent = parent;
+		this.id = id;
 		this.data = data;
+	}
+	
+	public int getID(){
+		return id;
 	}
 	
 	@Override
@@ -52,17 +59,17 @@ public class Config<Type> implements NodeComponent, ValueHandler<Type>{
 
 	@Override
 	public void saveTo(XMLNode node) {
-		XMLNode n = new XMLNode(name);
-		n.setProperty("type", "config");
+		XMLNode n = new XMLNode(XMLTypeName);
+		n.setProperty("name", name);
 		data.saveTo(n);
 		node.addChild(n);
 	}
 
 	@Override
 	public void loadFrom(XMLNode node) {
-		XMLNode child;
-		for(int i=0; i<node.getChildrenAmount(); i++){
-			if(!((child=node.getChild(i)).getName().equalsIgnoreCase(name) && child.getProperty("type").equalsIgnoreCase("config")))
+		XMLNode[] children = node.getChildByName(XMLTypeName);
+		for(XMLNode child:children){
+			if(child.getProperty("name").equalsIgnoreCase(name))
 				continue;
 			data.loadFrom(child);
 			return;

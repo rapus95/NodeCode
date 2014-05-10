@@ -1,5 +1,6 @@
 package core;
 
+import XML.XMLNode;
 import main.InputNodeSeperator;
 import main.OutputNodeSeperator;
 import node.NodeBranch;
@@ -30,5 +31,9 @@ public class NodeFactory {
 			return new OutputNodeSeperator();
 		return null;
 			
+	}
+
+	public static Node getNewNode(XMLNode child) {
+		return getNewNodeForName(child.getProperty("type"));
 	}
 }

@@ -6,6 +6,7 @@ import type.NumberData;
 import type.SelectionData;
 import XML.XMLNode;
 import core.Config;
+import core.Helper;
 import core.Node;
 import core.PinBase;
 import core.PinProgramIn;
@@ -18,13 +19,13 @@ public class NodeMaths extends Node {
 
 	@Override
 	protected PinBase execute() {
-		int mode = PinValueIn.<Number>getValue(getConfig(0)).intValue();
-		double result = PinValueIn.getValue(getValIn(0));
+		int mode = Helper.<Number>getValue(getConfig(0)).intValue();
+		double result = Helper.getValue(getValIn(0));
 		for(int i=1; i<getAmountOfValIn(); i++){
 			if(mode==0){
-				result+=PinValueIn.<Number>getValue(getValIn(i)).doubleValue();
+				result+=Helper.<Number>getValue(getValIn(i)).doubleValue();
 			}else{
-				result*=PinValueIn.<Number>getValue(getValIn(i)).doubleValue();
+				result*=Helper.<Number>getValue(getValIn(i)).doubleValue();
 			}
 		}
 		getValOut(0).setValueUnchecked(result);
@@ -33,19 +34,19 @@ public class NodeMaths extends Node {
 
 	@Override
 	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
-		valIn.add(new PinValueIn<Number>(this, "var1", new NumberData()));
-		valIn.add(new PinValueIn<Number>(this, "var2", new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "var1", 0, new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "var2", 1, new NumberData()));
 	}
 
 	@Override
 	public void initConfigs(ArrayList<Config<?>> configs) {
-		configs.add(new Config<Integer>(this, "operation", new SelectionData(new String[]{"plus", "times"})));
+		configs.add(new Config<Integer>(this, "operation", 0, new SelectionData(new String[]{"plus", "times"})));
 	}
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "progOut"));
-		valOut.add(new PinValueOut<Number>(this, "result", new NumberData()));
+		progOut.add(new PinProgramOut(this, "progOut", 0));
+		valOut.add(new PinValueOut<Number>(this, "result", 0, new NumberData()));
 	}
 
 	@Override
@@ -58,6 +59,11 @@ public class NodeMaths extends Node {
 
 	@Override
 	protected void loadFrom(XMLNode node) {}
+
+	@Override
+	public IPOType getIPOType() {
+		return IPOType.PROCESS;
+	}
 	
 	
 

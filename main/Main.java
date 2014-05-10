@@ -1,19 +1,27 @@
 package main;
-import java.util.Arrays;
-
-import node.NodeBranch;
-import node.NodeItemStackSeperate;
-import type.ItemStack;
-import type.SelectionData;
 import core.Grid;
 import core.GridHelper;
-import core.Node;
+import node.NodeMaths;
+import XML.XMLNode;
 
 
 public class Main {
 
 	public static void main(String[] args) {
-		InputNodeSeperator in = new InputNodeSeperator();
+		NodeMaths nm = new NodeMaths();
+		NodeMaths nm1 = new NodeMaths();
+		NodeMaths nm2 = new NodeMaths();
+		GridHelper.connectProg(nm1, 0, nm2);
+		GridHelper.connectProg(nm2, 0, nm);
+		GridHelper.connectVal(nm1, 0, nm, 0);
+		GridHelper.connectVal(nm2, 0, nm, 1);
+		XMLNode t = new XMLNode("test");
+		Grid.getCurrent().saveTo(t);
+		System.out.println(t);
+		String out = new PC_NodeToMiniscriptConverter().makeCode(t);
+		System.out.println(out);
+		return;
+		/*InputNodeSeperator in = new InputNodeSeperator();
 		NodeItemStackSeperate sep = new NodeItemStackSeperate();
 		NodeBranch branch = new NodeBranch();
 		SelectionData sd = (SelectionData)branch.getConfig(0).getData();
@@ -55,7 +63,7 @@ public class Main {
 			OutputNodeSeperator on = (OutputNodeSeperator) last;
 			System.out.println("dir: " + on.getDirection());
 			System.out.println("out: " + Arrays.toString(on.getOutputDirection()));
-		}
+		}*/
 	}
 
 }

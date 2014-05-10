@@ -3,6 +3,7 @@ package core;
 import XML.XMLNode;
 
 public interface ValueType<DataType> {
+	public static final String XMLTypeName = "data";
 	public DataType getValue();
 	public void setValueUnchecked(Object o);
 	public DataType convert(Object o);

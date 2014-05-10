@@ -57,7 +57,8 @@ public class ItemStackData implements ValueType<ItemStack> {
 
 	@Override
 	public void saveTo(XMLNode node) {
-		XMLNode own = new XMLNode("data");
+		XMLNode own = new XMLNode(XMLTypeName);
+		own.setProperty("type", "ItemStack");
 		own.setProperty("id", ""+is.id);
 		own.setProperty("meta", ""+is.meta);
 		own.setProperty("stackSize", ""+is.stacksize);
@@ -66,10 +67,10 @@ public class ItemStackData implements ValueType<ItemStack> {
 
 	@Override
 	public void loadFrom(XMLNode node) {
-		XMLNode own = node.getChildByName("data");
-		is = new ItemStack(Integer.valueOf(own.getProperty("id")),
-				Integer.valueOf(own.getProperty("meta")),
-				Integer.valueOf(own.getProperty("stackSize")));
+		XMLNode[] own = node.getChildByName(XMLTypeName);
+		is = new ItemStack(Integer.valueOf(own[0].getProperty("id")),
+				Integer.valueOf(own[0].getProperty("meta")),
+				Integer.valueOf(own[0].getProperty("stackSize")));
 	}
 
 }

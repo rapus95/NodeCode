@@ -7,6 +7,7 @@ import type.ItemStackData;
 import type.NumberData;
 import XML.XMLNode;
 import core.Config;
+import core.Helper;
 import core.Node;
 import core.PinBase;
 import core.PinProgramIn;
@@ -19,10 +20,10 @@ public class NodeItemCompareOutCount extends Node {
 
 	@Override
 	protected PinBase execute() {
-		ItemStack is = PinValueIn.getValue(getValIn(0));
+		ItemStack is = Helper.getValue(getValIn(0));
 		ItemStack tmp;
 		for(int i=0; i<getAmountOfConfigs(); i++){
-			tmp = PinValueIn.getValue(getConfig(i));
+			tmp = Helper.getValue(getConfig(i));
 			if(tmp==null)
 				continue;
 			if(is.id==tmp.id && is.meta==tmp.meta)
@@ -33,20 +34,20 @@ public class NodeItemCompareOutCount extends Node {
 
 	@Override
 	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
-		valIn.add(new PinValueIn<ItemStack>(this, "itemStack", new ItemStackData()));
+		valIn.add(new PinValueIn<ItemStack>(this, "itemStack", 0, new ItemStackData()));
 	}
 
 	@Override
 	public void initConfigs(ArrayList<Config<?>> configs) {
 		for(int i=0; i<9; i++){
-			configs.add(new Config<ItemStack>(this, "item"+(i+1), new ItemStackData()));
+			configs.add(new Config<ItemStack>(this, "item"+(i+1), 0, new ItemStackData()));
 		}
 	}
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "progOut"));
-		valOut.add(new PinValueOut<Number>(this, "amount", new NumberData()));
+		progOut.add(new PinProgramOut(this, "progOut", 0));
+		valOut.add(new PinValueOut<Number>(this, "amount", 0, new NumberData()));
 	}
 
 	@Override
@@ -59,5 +60,10 @@ public class NodeItemCompareOutCount extends Node {
 
 	@Override
 	protected void loadFrom(XMLNode node) {}
+
+	@Override
+	public IPOType getIPOType() {
+		return IPOType.PROCESS;
+	}
 
 }

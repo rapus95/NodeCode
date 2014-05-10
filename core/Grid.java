@@ -41,7 +41,7 @@ public class Grid {
 		Node n;
 		for(int i=0; i<own.getChildrenAmount(); i++){
 			child = own.getChild(i);
-			n = NodeFactory.getNewNodeForName(child.getProperty("type"));
+			n = NodeFactory.getNewNode(child);
 			n.load(child);
 		}
 		for(int i=0; i<nodes.size(); i++){

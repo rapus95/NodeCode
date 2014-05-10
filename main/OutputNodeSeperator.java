@@ -1,10 +1,11 @@
 package main;
 import java.util.ArrayList;
 
-import XML.XMLNode;
 import type.NumberData;
 import type.SelectionData;
+import XML.XMLNode;
 import core.Config;
+import core.Helper;
 import core.Node;
 import core.PinBase;
 import core.PinProgramIn;
@@ -22,21 +23,21 @@ public class OutputNodeSeperator extends Node {
 	@Override
 	protected PinBase execute() {
 		isCalculated=true;
-		outputDirection[0] = PinValueIn.<Number>getValue(getValIn(0)).intValue();
-		outputDirection[1] = PinValueIn.<Number>getValue(getValIn(1)).intValue();
-		outputDirection[2] = PinValueIn.<Number>getValue(getValIn(2)).intValue();
-		outputDirection[3] = PinValueIn.<Number>getValue(getValIn(3)).intValue();
-		dir = PinValueIn.getValue(getValIn(4));
+		outputDirection[0] = Helper.<Number>getValue(getValIn(0)).intValue();
+		outputDirection[1] = Helper.<Number>getValue(getValIn(1)).intValue();
+		outputDirection[2] = Helper.<Number>getValue(getValIn(2)).intValue();
+		outputDirection[3] = Helper.<Number>getValue(getValIn(3)).intValue();
+		dir = Helper.getValue(getValIn(4));
 		return null;
 	}
 
 	@Override
 	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
-		valIn.add(new PinValueIn<Number>(this, "outFront", new NumberData()));
-		valIn.add(new PinValueIn<Number>(this, "outRight", new NumberData()));
-		valIn.add(new PinValueIn<Number>(this, "outBack", new NumberData()));
-		valIn.add(new PinValueIn<Number>(this, "outLeft", new NumberData()));
-		valIn.add(new PinValueIn<Integer>(this, "dir", new SelectionData(new String[]{"north", "east", "south", "west"})));
+		valIn.add(new PinValueIn<Number>(this, "outFront", 0, new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "outRight", 1, new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "outBack", 2, new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "outLeft", 3, new NumberData()));
+		valIn.add(new PinValueIn<Integer>(this, "dir", 4, new SelectionData(new String[]{"north", "east", "south", "west"})));
 	}
 
 	@Override
@@ -63,5 +64,10 @@ public class OutputNodeSeperator extends Node {
 
 	@Override
 	protected void loadFrom(XMLNode node) {}
+
+	@Override
+	public IPOType getIPOType() {
+		return IPOType.OUTPUT;
+	}
 
 }

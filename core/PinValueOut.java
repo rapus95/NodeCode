@@ -8,8 +8,8 @@ public class PinValueOut<Type> extends PinBaseImp implements PinOutput, ValueHan
 	
 	private ValueType<Type> data;
 	
-	public PinValueOut(Node parent, String name, ValueType<Type> var) {
-		super(parent, name);
+	public PinValueOut(Node parent, String name, int id, ValueType<Type> var) {
+		super(parent, name, id);
 		data = var;
 	}
 

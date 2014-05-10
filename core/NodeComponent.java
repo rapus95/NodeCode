@@ -7,6 +7,7 @@ public interface NodeComponent {
 	public abstract Node getNode();
 
 	public abstract String getName();
+	public int getID();
 	
 	public abstract void init();
 	public abstract void reset();

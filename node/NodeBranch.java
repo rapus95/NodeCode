@@ -2,9 +2,9 @@ package node;
 
 import java.util.ArrayList;
 
-import XML.XMLNode;
 import type.NumberData;
 import type.SelectionData;
+import XML.XMLNode;
 import core.Config;
 import core.Node;
 import core.PinBase;
@@ -29,19 +29,19 @@ public class NodeBranch extends Node {
 
 	@Override
 	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
-		valIn.add(new PinValueIn<Number>(this, "in1", new NumberData()));
-		valIn.add(new PinValueIn<Number>(this, "in2", new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "in1", 0, new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "in2", 1, new NumberData()));
 	}
 
 	@Override
 	public void initConfigs(ArrayList<Config<?>> configs) {
-		configs.add(new Config<Integer>(this, "Mode", new SelectionData(new String[]{"Equal", "Not Equal"})));
+		configs.add(new Config<Integer>(this, "Mode", 0, new SelectionData(new String[]{"Equal", "Not Equal"})));
 	}
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "equal"));
-		progOut.add(new PinProgramOut(this, "unequal"));
+		progOut.add(new PinProgramOut(this, "equal", 0));
+		progOut.add(new PinProgramOut(this, "unequal", 1));
 	}
 
 	@Override
@@ -54,6 +54,11 @@ public class NodeBranch extends Node {
 
 	@Override
 	protected void loadFrom(XMLNode node) {}
+
+	@Override
+	public IPOType getIPOType() {
+		return IPOType.PROCESS;
+	}
 	
 	
 	

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import XML.XMLNode;
 
 public abstract class Node {
-	private PinProgramIn progIn = new PinProgramIn(this, "ProgIn");
+	private PinProgramIn progIn = new PinProgramIn(this, "ProgIn", 0);
 	private ArrayList<PinProgramOut> progOut = new ArrayList<PinProgramOut>();
 	private ArrayList<Config<?>> configs = new ArrayList<Config<?>>();
 	private ArrayList<PinValueIn<?>> valIn = new ArrayList<PinValueIn<?>>();
@@ -17,6 +17,9 @@ public abstract class Node {
 	protected Grid grid;
 	protected int uniqueID;
 	
+	public enum IPOType{
+		INPUT, PROCESS, OUTPUT, STORAGE;
+	}
 	
 	protected Node(){
 		this.x = 0;
@@ -36,11 +39,24 @@ public abstract class Node {
 		return uniqueID;
 	}
 	
-	public Node run(){
-		prepare();
+	public final Node run(){
 		isCalculated=true;
+		prepare();
 		PinBase pb = execute();
 		return pb==null?null:pb.getNode();
+	}
+	
+	public final void prepare(){
+		Node origin;
+		PinOutput out;
+		for(PinValueIn<?> pin:valIn){
+			if((out=pin.getOrigin())==null)
+				continue;
+			origin = out.getNode();
+			if((GridHelper.calculationFlow || origin.canBeCalcedOnRequest()) && !origin.isCalculated()){
+				origin.run();
+			}
+		}
 	}
 	
 	public void reset(){
@@ -49,28 +65,29 @@ public abstract class Node {
 	}
 	
 	public void save(XMLNode node){
-		XMLNode own = new XMLNode(name);
+		XMLNode own = new XMLNode(getIPOType().name());
 		own.setProperty("id", ""+uniqueID);
-		own.setProperty("type", getDefaultName());
 		own.setProperty("calcOnRequest", ""+calcOnRequest);
+		own.setProperty("type", getDefaultName());
+		own.setProperty("name", name);
 		saveTo(own);
-		for(NodeComponent pin:valIn){pin.saveTo(own);}
 		for(NodeComponent conf:configs){conf.saveTo(own);}
-		for(NodeComponent pin:valOut){pin.saveTo(own);}
+		for(NodeComponent pin:valIn){pin.saveTo(own);}
+		for(NodeComponent pin:progOut){pin.saveTo(own);}
 		node.addChild(own);
 	}
 	
 	public void load(XMLNode own){
-		name = own.getName();
+		name = own.getProperty("name");
 		uniqueID=Integer.valueOf(own.getProperty("id"));
 		calcOnRequest=Boolean.valueOf(own.getProperty("calcOnRequest"));
 		loadFrom(own);
 	}
 	
 	public void load2(XMLNode own){
-		for(NodeComponent pin:valIn){pin.loadFrom(own);}
 		for(NodeComponent conf:configs){conf.loadFrom(own);}
-		for(NodeComponent pin:valOut){pin.loadFrom(own);}
+		for(NodeComponent pin:valIn){pin.loadFrom(own);}
+		for(NodeComponent pin:progOut){pin.loadFrom(own);}
 	}
 	
 	protected abstract PinBase execute();
@@ -78,6 +95,7 @@ public abstract class Node {
 	public abstract void initConfigs(ArrayList<Config<?>> configs);
 	public abstract void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut);
 	public abstract String getDefaultName();
+	public abstract IPOType getIPOType();
 	protected abstract void saveTo(XMLNode node);
 	protected abstract void loadFrom(XMLNode node);
 	
@@ -127,19 +145,6 @@ public abstract class Node {
 	
 	public boolean canBeCalcedOnRequest(){
 		return calcOnRequest;
-	}
-	
-	public void prepare(){
-		Node origin;
-		PinOutput out;
-		for(PinValueIn<?> pin:valIn){
-			if((out=pin.getOrigin())==null)
-				continue;
-			origin = out.getNode();
-			if((GridHelper.calculationFlow || origin.canBeCalcedOnRequest()) && !origin.isCalculated()){
-				origin.run();
-			}
-		}
 	}
 	
 	public void toggleCalcOnRequest(){

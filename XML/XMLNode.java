@@ -1,7 +1,7 @@
 package XML;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -10,7 +10,7 @@ public class XMLNode {
 
 	private String name;
 	
-	private HashMap<String, String> properties = new HashMap<String, String>();
+	private LinkedHashMap<String, String> properties = new LinkedHashMap<String, String>();
 	
 	private List<XMLNode> children = new ArrayList<XMLNode>();
 	
@@ -53,12 +53,13 @@ public class XMLNode {
 		return this.children.get(i);
 	}
 	
-	public XMLNode getChildByName(String searchName){
+	public XMLNode[] getChildByName(String searchName){
+		ArrayList<XMLNode> list = new ArrayList<XMLNode>();
 		for(XMLNode child:children){
 			if(child.getName().equalsIgnoreCase(searchName))
-				return child;
+				list.add(child);
 		}
-		return null;
+		return list.toArray(new XMLNode[0]);
 	}
 	
 	public String save(String ls){
@@ -86,5 +87,11 @@ public class XMLNode {
 	public String save() {
 		return save("");
 	}
+
+	@Override
+	public String toString() {
+		return save();
+	}
+	
 	
 }

@@ -2,10 +2,11 @@ package node;
 
 import java.util.ArrayList;
 
-import XML.XMLNode;
 import type.NumberData;
+import XML.XMLNode;
 import core.Config;
 import core.GridHelper;
+import core.Helper;
 import core.Node;
 import core.PinBase;
 import core.PinProgramIn;
@@ -18,9 +19,9 @@ public class NodeCountLoop extends Node {
 	
 	@Override
 	protected PinBase execute() {
-		double start = PinValueIn.<Number>getValue(getValIn(0)).doubleValue();
-		double end = PinValueIn.<Number>getValue(getValIn(1)).doubleValue();
-		double stepSize = PinValueIn.<Number>getValue(getValIn(2)).doubleValue();
+		double start = Helper.<Number>getValue(getValIn(0)).doubleValue();
+		double end = Helper.<Number>getValue(getValIn(1)).doubleValue();
+		double stepSize = Helper.<Number>getValue(getValIn(2)).doubleValue();
 		for(double d=start; d<=end; d+=stepSize){
 			getValOut(0).setValueUnchecked(d);
 			GridHelper.runProgram(getProgOut(1).getTarget().getNode());
@@ -30,9 +31,9 @@ public class NodeCountLoop extends Node {
 
 	@Override
 	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
-		valIn.add(new PinValueIn<Number>(this, "start", new NumberData()));
-		valIn.add(new PinValueIn<Number>(this, "last", new NumberData()));
-		valIn.add(new PinValueIn<Number>(this, "stepSize", new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "start", 0, new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "last", 1, new NumberData()));
+		valIn.add(new PinValueIn<Number>(this, "stepSize", 2, new NumberData()));
 	}
 
 	@Override
@@ -42,9 +43,9 @@ public class NodeCountLoop extends Node {
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "progOut"));
-		progOut.add(new PinProgramOut(this, "loop"));
-		valOut.add(new PinValueOut<Number>(this, "counter", new NumberData()));
+		progOut.add(new PinProgramOut(this, "progOut", 0));
+		progOut.add(new PinProgramOut(this, "loop", 1));
+		valOut.add(new PinValueOut<Number>(this, "counter", 0, new NumberData()));
 	}
 
 	@Override
@@ -57,5 +58,10 @@ public class NodeCountLoop extends Node {
 
 	@Override
 	protected void loadFrom(XMLNode node) {}
+
+	@Override
+	public IPOType getIPOType() {
+		return IPOType.PROCESS;
+	}
 
 }
