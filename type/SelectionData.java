@@ -36,6 +36,10 @@ public class SelectionData implements ValueType<Integer> {
 		return Number.class.isAssignableFrom(other) || other==String.class;
 	}
 
+	public String[] getOptions(){
+		return options;
+	}
+	
 	@Override
 	public void setValue(Integer dt) {
 		if(dt<0 || dt>options.length-1)
