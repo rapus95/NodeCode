@@ -88,10 +88,10 @@ public class PinValueIn<Type> extends PinBaseImp implements PinInput, ValueHandl
 	@Override
 	public void saveTo(XMLNode node) {
 		XMLNode n = new XMLNode(XMLTypeName);
-		n.setProperty("name", name);
-		n.setProperty("originNode", ""+(origin==null?-1:origin.getNode().getUniqueID()));
-		n.setProperty("originPinName", ""+(origin==null?-1:origin.getName()));
-		n.setProperty("originPin", ""+(origin==null?-1:origin.getID()));
+		n.setString("name", name);
+		n.setInt("originNode", (origin==null?-1:origin.getNode().getUniqueID()));
+		n.setString("originPinName", (origin==null?"-1":origin.getName()));
+		n.setInt("originPin", (origin==null?-1:origin.getID()));
 		data.saveTo(n);
 		node.addChild(n);
 	}
@@ -100,10 +100,16 @@ public class PinValueIn<Type> extends PinBaseImp implements PinInput, ValueHandl
 	public void loadFrom(XMLNode node) {
 		XMLNode[] children = node.getChildByName(XMLTypeName);
 		for(XMLNode child:children){
-			if(!child.getProperty("name").equalsIgnoreCase(name))
+			if(!child.getString("name").equalsIgnoreCase(name))
 				continue;
-			Node tmp = getNode().getGrid().getNodeByUniqueID(Integer.valueOf(child.getProperty("originNode")));
-			origin = tmp==null?null:tmp.getPinValOutByName(child.getProperty("originPinName"));
+			Node tmp = getNode().getGrid().getNodeByUniqueID(Integer.valueOf(child.getInt("originNode")));
+			if(tmp==null)
+				origin = null;
+			else{
+				origin = tmp.getPinValOutByName(child.getString("originPinName"));
+				if(origin==null)
+					origin = tmp.getPinValOutByID(child.getInt("originPin"));
+			}
 			data.loadFrom(child);
 			return;
 		}

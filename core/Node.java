@@ -66,10 +66,10 @@ public abstract class Node {
 	
 	public void save(XMLNode node){
 		XMLNode own = new XMLNode(getIPOType().name());
-		own.setProperty("id", ""+uniqueID);
-		own.setProperty("calcOnRequest", ""+calcOnRequest);
-		own.setProperty("type", getDefaultName());
-		own.setProperty("name", name);
+		own.setInt("id", uniqueID);
+		own.setBoolean("calcOnRequest", calcOnRequest);
+		own.setString("type", getDefaultName());
+		own.setString("name", name);
 		saveTo(own);
 		for(NodeComponent conf:configs){conf.saveTo(own);}
 		for(NodeComponent pin:valIn){pin.saveTo(own);}
@@ -78,9 +78,9 @@ public abstract class Node {
 	}
 	
 	public void load(XMLNode own){
-		name = own.getProperty("name");
-		uniqueID=Integer.valueOf(own.getProperty("id"));
-		calcOnRequest=Boolean.valueOf(own.getProperty("calcOnRequest"));
+		name = own.getString("name");
+		uniqueID=Integer.valueOf(own.getInt("id"));
+		calcOnRequest=Boolean.valueOf(own.getBoolean("calcOnRequest"));
 		loadFrom(own);
 	}
 	
@@ -178,6 +178,14 @@ public abstract class Node {
 	public PinValueOut<?> getPinValOutByName(String property) {
 		for(PinValueOut<?> out:valOut){
 			if(out.getName().equalsIgnoreCase(property))
+				return out;
+		}
+		return null;
+	}
+	
+	public PinValueOut<?> getPinValOutByID(int id) {
+		for(PinValueOut<?> out:valOut){
+			if(out.getID()==id)
 				return out;
 		}
 		return null;

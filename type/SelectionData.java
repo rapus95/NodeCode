@@ -11,11 +11,6 @@ public class SelectionData implements ValueType<Integer> {
 	public SelectionData(String... options){
 		this.options = options;
 	}
-	
-	public SelectionData(XMLNode node){
-		options = node.getProperty("values").split(",");
-		selected = Integer.valueOf(node.getProperty("selected"));
-	}
 
 	@Override
 	public Integer getValue() {
@@ -87,16 +82,16 @@ public class SelectionData implements ValueType<Integer> {
 	@Override
 	public void saveTo(XMLNode node) {
 		XMLNode own = new XMLNode(XMLTypeName);
-		own.setProperty("type", "Selection");
-		own.setProperty("values", optionText());
-		own.setProperty("selected", ""+selected);
+		own.setString("type", "Selection");
+		own.setString("values", optionText());
+		own.setInt("selected", selected);
 		node.addChild(own);
 	}
 
 	@Override
 	public void loadFrom(XMLNode node) {
 		XMLNode[] own = node.getChildByName(XMLTypeName);
-		selected = Integer.valueOf(own[0].getProperty("selected"));
+		selected = own[0].getInt("selected");
 	}
 	
 	private String optionText(){

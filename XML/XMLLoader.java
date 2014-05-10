@@ -38,7 +38,7 @@ public class XMLLoader {
 			int l = nnm.getLength();
 			for(int i=0; i<l; i++){
 				Node n = nnm.item(i);
-				node.setProperty(n.getNodeName(), n.getNodeValue());
+				node.setString(n.getNodeName(), n.getNodeValue());
 			}
 		}
 		NodeList nl = item.getChildNodes();

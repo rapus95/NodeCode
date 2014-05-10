@@ -10,7 +10,7 @@ public class XMLNode {
 
 	private String name;
 	
-	private LinkedHashMap<String, String> properties = new LinkedHashMap<String, String>();
+	private LinkedHashMap<String, Object> properties = new LinkedHashMap<String, Object>();
 	
 	private List<XMLNode> children = new ArrayList<XMLNode>();
 	
@@ -24,12 +24,84 @@ public class XMLNode {
 		return this.name;
 	}
 	
-	public void setProperty(String key, String value){
+	public void setString(String key, String value){
 		this.properties.put(key, value);
 	}
 	
-	public String getProperty(String key){
-		return this.properties.get(key);
+	public void setBoolean(String key, boolean value){
+		this.properties.put(key, value);
+	}
+	
+	public void setByte(String key, byte value){
+		this.properties.put(key, value);
+	}
+	
+	public void setShort(String key, short value){
+		this.properties.put(key, value);
+	}
+	
+	public void setInt(String key, int value){
+		this.properties.put(key, value);
+	}
+	
+	public void setFloat(String key, float value){
+		this.properties.put(key, value);
+	}
+	
+	public void setDouble(String key, double value){
+		this.properties.put(key, value);
+	}
+	
+	public String getString(String key){
+		return this.properties.get(key).toString();
+	}
+	
+	public boolean getBoolean(String key){
+		Object o = this.properties.get(key);
+		if(o instanceof Boolean)
+			return (Boolean)o;
+		else
+			return Boolean.valueOf((String)o);
+	}
+	
+	public byte getByte(String key){
+		Object o = this.properties.get(key);
+		if(o instanceof Number)
+			return ((Number)o).byteValue();
+		else
+			return Byte.valueOf((String)o);
+	}
+	
+	public short getShort(String key){
+		Object o = this.properties.get(key);
+		if(o instanceof Number)
+			return ((Number)o).shortValue();
+		else
+			return Short.valueOf((String)o);
+	}
+	
+	public int getInt(String key){
+		Object o = this.properties.get(key);
+		if(o instanceof Number)
+			return ((Number)o).intValue();
+		else
+			return Integer.valueOf((String)o);
+	}
+	
+	public float getFloat(String key){
+		Object o = this.properties.get(key);
+		if(o instanceof Number)
+			return ((Number)o).floatValue();
+		else
+			return Float.valueOf((String)o);
+	}
+	
+	public double getDouble(String key){
+		Object o = this.properties.get(key);
+		if(o instanceof Number)
+			return ((Number)o).doubleValue();
+		else
+			return Double.valueOf((String)o);
 	}
 	
 	public void setText(String text){
@@ -64,8 +136,8 @@ public class XMLNode {
 	
 	public String save(String ls){
 		String out = ls + "<"+this.name;
-		for(Entry<String, String> e:this.properties.entrySet()){
-			out += " "+e.getKey()+" = \""+e.getValue()+"\"";
+		for(Entry<String, Object> e:this.properties.entrySet()){
+			out += " "+e.getKey()+" = \""+e.getValue().toString()+"\"";
 		}
 		if(this.children.isEmpty() && this.text.trim().isEmpty()){
 			return out + "/>";

@@ -55,14 +55,14 @@ public class NumberData implements ValueType<Number>{
 	@Override
 	public void saveTo(XMLNode node) {
 		XMLNode own = new XMLNode(XMLTypeName);
-		own.setProperty("type", "Number");
-		own.setProperty("value", ""+value);
+		own.setString("type", "Number");
+		own.setDouble("value", value);
 		node.addChild(own);
 	}
 
 	@Override
 	public void loadFrom(XMLNode node) {
 		XMLNode[] own = node.getChildByName(XMLTypeName);
-		value = Double.valueOf(own[0].getProperty("value"));
+		value = own[0].getDouble("value");
 	}
 }

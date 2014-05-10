@@ -34,6 +34,6 @@ public class NodeFactory {
 	}
 
 	public static Node getNewNode(XMLNode child) {
-		return getNewNodeForName(child.getProperty("type"));
+		return getNewNodeForName(child.getString("type"));
 	}
 }

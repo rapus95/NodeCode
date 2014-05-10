@@ -57,15 +57,15 @@ public class StringData implements ValueType<String> {
 	@Override
 	public void saveTo(XMLNode node) {
 		XMLNode own = new XMLNode(XMLTypeName);
-		own.setProperty("type", "String");
-		own.setProperty("value", text);
+		own.setString("type", "String");
+		own.setString("value", text);
 		node.addChild(own);
 	}
 
 	@Override
 	public void loadFrom(XMLNode node) {
 		XMLNode[] own = node.getChildByName(XMLTypeName);
-		text = own[0].getProperty("value");
+		text = own[0].getString("value");
 	}
 
 }

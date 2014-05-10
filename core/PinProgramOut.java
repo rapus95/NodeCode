@@ -59,9 +59,9 @@ public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
 	@Override
 	public void saveTo(XMLNode node) {
 		XMLNode n = new XMLNode(XMLTypeName);
-		n.setProperty("name", name);
-		n.setProperty("targetNode", ""+(target==null?-1:target.getNode().getUniqueID()));
-		n.setProperty("targetPin", ""+(target==null?"":target.getName()));
+		n.setString("name", name);
+		n.setInt("targetNode", (target==null?-1:target.getNode().getUniqueID()));
+		n.setString("targetPin", ""+(target==null?"":target.getName()));
 		node.addChild(n);
 	}
 
@@ -69,10 +69,14 @@ public class PinProgramOut extends PinBaseImp implements PinOutput, PinProgram {
 	public void loadFrom(XMLNode node) {
 		XMLNode[] children = node.getChildByName(XMLTypeName);
 		for(XMLNode child:children){
-			if(child.getProperty("name").equalsIgnoreCase(name))
+			if(child.getString("name").equalsIgnoreCase(name))
 				continue;
-			Node tmp = getNode().getGrid().getNodeByUniqueID(Integer.valueOf(child.getProperty("targetNode")));
-			target = tmp==null?null:tmp.getPinProgInByName(child.getProperty("targetPin"));
+			Node tmp = getNode().getGrid().getNodeByUniqueID(Integer.valueOf(child.getInt("targetNode")));
+			if(tmp==null)
+				target = null;
+			else{
+				target = tmp.getPinProgInByName(child.getString("targetPin"));
+			}
 			return;
 		}
 	}
