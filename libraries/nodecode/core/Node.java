@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import libraries.nodecode.XML.XMLNode;
 
-public abstract class Node {
-	private PinProgramIn progIn = new PinProgramIn(this, "ProgIn", 0);
+public abstract class Node{
+	private ArrayList<PinProgramIn> progIn = new ArrayList<PinProgramIn>();
 	private ArrayList<PinProgramOut> progOut = new ArrayList<PinProgramOut>();
 	private ArrayList<Config<?>> configs = new ArrayList<Config<?>>();
 	private ArrayList<PinValueIn<?>> valIn = new ArrayList<PinValueIn<?>>();
@@ -22,9 +22,14 @@ public abstract class Node {
 	}
 	
 	protected Node(){
+		this(GridHandler.getCurrent());
+	}
+	
+	protected Node(Grid grid){
+		progIn.add(new PinProgramIn(this, "ProgIn", 0));
+		progOut.add(new PinProgramOut(this, "ProgOut", 0));
 		this.x = 0;
 		this.y = 0;
-		grid = Grid.getCurrent();
 		uniqueID = grid.registerNode(this);
 		initInputs(progIn, valIn);
 		initConfigs(configs);
@@ -91,7 +96,7 @@ public abstract class Node {
 	}
 	
 	protected abstract PinBase execute();
-	public abstract void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn);
+	public abstract void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn);
 	public abstract void initConfigs(ArrayList<Config<?>> configs);
 	public abstract void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut);
 	public abstract String getDefaultName();
@@ -99,8 +104,8 @@ public abstract class Node {
 	protected abstract void saveTo(XMLNode node);
 	protected abstract void loadFrom(XMLNode node);
 	
-	public PinProgramIn getProgIn(){
-		return progIn;
+	public PinProgramIn getProgIn(int index){
+		return progIn.get(index);
 	}
 	
 	public PinProgramOut getProgOut(int index){
@@ -160,7 +165,11 @@ public abstract class Node {
 	}
 
 	public PinProgramIn getPinProgInByName(String property) {
-		return progIn;
+		for(PinProgramIn in:progIn){
+			if(in.getName().equalsIgnoreCase(property))
+				return in;
+		}
+		return null;
 	}
 
 	public PinProgramOut getPinProgOutByName(String property) {

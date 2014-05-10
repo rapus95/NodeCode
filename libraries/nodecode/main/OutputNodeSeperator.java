@@ -15,8 +15,7 @@ import libraries.nodecode.type.SelectionData;
 
 
 public class OutputNodeSeperator extends Node {
-	public static final String defaultName = "ReturnNode";
-
+	
 	int outputDirection[] = new int[4];
 	int dir;
 	
@@ -32,7 +31,7 @@ public class OutputNodeSeperator extends Node {
 	}
 
 	@Override
-	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
+	public void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<Number>(this, "outFront", 0, new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "outRight", 1, new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "outBack", 2, new NumberData()));
@@ -44,11 +43,13 @@ public class OutputNodeSeperator extends Node {
 	public void initConfigs(ArrayList<Config<?>> configs) {}
 
 	@Override
-	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {}
+	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
+		progOut.clear();
+	}
 
 	@Override
 	public String getDefaultName() {
-		return defaultName;
+		return "ReturnNode";
 	}
 	
 	public int[] getOutputDirection(){

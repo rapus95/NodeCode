@@ -1,39 +1,29 @@
 package libraries.nodecode.core;
 
+import java.util.HashMap;
+import java.util.concurrent.Callable;
+
 import libraries.nodecode.XML.XMLNode;
-import libraries.nodecode.main.InputNodeSeperator;
-import libraries.nodecode.main.OutputNodeSeperator;
-import libraries.nodecode.node.NodeBranch;
-import libraries.nodecode.node.NodeCountLoop;
-import libraries.nodecode.node.NodeItemCompareOutCount;
-import libraries.nodecode.node.NodeItemStackSeperate;
-import libraries.nodecode.node.NodeMaths;
 
 public class NodeFactory {
+	
+	private static HashMap<String, Callable<? extends Node>> nodes = new HashMap<String, Callable<? extends Node>>();
 
+	public static void registerNode(String name, Callable<Node> n){
+		if(!nodes.containsKey(name))
+			nodes.put(name, n);
+	}
+	
 	public static Node getNewNodeForName(String type){
-		if(type.equalsIgnoreCase(NodeBranch.defaultName))
-			return new NodeBranch();
-		else if(type.equalsIgnoreCase(NodeCountLoop.defaultName))
-			return new NodeCountLoop();
-		else if(type.equalsIgnoreCase(NodeItemStackSeperate.defaultName))
-			return new NodeItemStackSeperate();
-		else if (type.equalsIgnoreCase(NodeItemCompareOutCount.defaultName))
-			return new NodeItemCompareOutCount();
-		else if (type.equalsIgnoreCase(NodeMaths.defaultName))
-			return new NodeMaths();
-		
-		
-		
-		else if (type.equalsIgnoreCase(InputNodeSeperator.defaultName))
-			return new InputNodeSeperator();
-		else if (type.equalsIgnoreCase(OutputNodeSeperator.defaultName))
-			return new OutputNodeSeperator();
+		Callable<? extends Node> factory = nodes.get(type);
+		try {
+			return factory.call();
+		} catch (Exception e) {}
 		return null;
-			
 	}
 
 	public static Node getNewNode(XMLNode child) {
 		return getNewNodeForName(child.getString("type"));
 	}
+	
 }

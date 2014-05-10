@@ -15,7 +15,6 @@ import libraries.nodecode.core.PinValueOut;
 import libraries.nodecode.type.NumberData;
 
 public class NodeCountLoop extends Node {
-	public static final String defaultName = "Loop";
 	
 	@Override
 	protected PinBase execute() {
@@ -30,7 +29,7 @@ public class NodeCountLoop extends Node {
 	}
 
 	@Override
-	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
+	public void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<Number>(this, "start", 0, new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "last", 1, new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "stepSize", 2, new NumberData()));
@@ -43,14 +42,13 @@ public class NodeCountLoop extends Node {
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "progOut", 0));
 		progOut.add(new PinProgramOut(this, "loop", 1));
 		valOut.add(new PinValueOut<Number>(this, "counter", 0, new NumberData()));
 	}
 
 	@Override
 	public String getDefaultName() {
-		return defaultName;
+		return "Loop";
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import libraries.nodecode.XML.XMLNode;
 
 public class Grid {
-	private static Grid current = new Grid();
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 	private int nextID=0;
 	
@@ -15,10 +14,6 @@ public class Grid {
 		nodes.add(node);
 		return nextID++;
 		
-	}
-
-	public static Grid getCurrent() {
-		return current;
 	}
 
 	public Node getNodeByUniqueID(int t) {
@@ -48,10 +43,6 @@ public class Grid {
 			nodes.get(i).load2(own.getChild(i));
 		}
 		nextID = Integer.valueOf(own.getInt("nextID"));
-	}
-
-	public static void setCurrent(Grid grid) {
-		current = grid;
 	}
 	
 	public void reset(){

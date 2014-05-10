@@ -15,7 +15,6 @@ import libraries.nodecode.type.NumberData;
 import libraries.nodecode.type.SelectionData;
 
 public class NodeMaths extends Node {
-	public static final String defaultName = "NodeMaths";
 
 	@Override
 	protected PinBase execute() {
@@ -33,7 +32,7 @@ public class NodeMaths extends Node {
 	}
 
 	@Override
-	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
+	public void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<Number>(this, "var1", 0, new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "var2", 1, new NumberData()));
 	}
@@ -45,13 +44,12 @@ public class NodeMaths extends Node {
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "progOut", 0));
 		valOut.add(new PinValueOut<Number>(this, "result", 0, new NumberData()));
 	}
 
 	@Override
 	public String getDefaultName() {
-		return defaultName;
+		return "NodeMaths";
 	}
 
 	@Override

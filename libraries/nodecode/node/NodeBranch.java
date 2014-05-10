@@ -1,10 +1,12 @@
 package libraries.nodecode.node;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 import libraries.nodecode.XML.XMLNode;
 import libraries.nodecode.core.Config;
 import libraries.nodecode.core.Node;
+import libraries.nodecode.core.NodeFactory;
 import libraries.nodecode.core.PinBase;
 import libraries.nodecode.core.PinProgramIn;
 import libraries.nodecode.core.PinProgramOut;
@@ -13,8 +15,7 @@ import libraries.nodecode.core.PinValueOut;
 import libraries.nodecode.type.NumberData;
 import libraries.nodecode.type.SelectionData;
 
-public class NodeBranch extends Node {
-	public static final String defaultName = "BranchNode";
+public class NodeBranch extends Node{
 	
 	@Override
 	protected PinBase execute() {
@@ -28,7 +29,7 @@ public class NodeBranch extends Node {
 	}
 
 	@Override
-	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
+	public void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<Number>(this, "in1", 0, new NumberData()));
 		valIn.add(new PinValueIn<Number>(this, "in2", 1, new NumberData()));
 	}
@@ -40,13 +41,14 @@ public class NodeBranch extends Node {
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
+		progOut.clear();
 		progOut.add(new PinProgramOut(this, "equal", 0));
 		progOut.add(new PinProgramOut(this, "unequal", 1));
 	}
 
 	@Override
 	public String getDefaultName() {
-		return defaultName;
+		return "BranchNode";
 	}
 
 	@Override

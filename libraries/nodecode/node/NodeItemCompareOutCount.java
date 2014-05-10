@@ -16,7 +16,6 @@ import libraries.nodecode.type.ItemStackData;
 import libraries.nodecode.type.NumberData;
 
 public class NodeItemCompareOutCount extends Node {
-	public static final String defaultName = "ItemAmountSelector";
 
 	@Override
 	protected PinBase execute() {
@@ -33,7 +32,7 @@ public class NodeItemCompareOutCount extends Node {
 	}
 
 	@Override
-	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
+	public void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<ItemStack>(this, "itemStack", 0, new ItemStackData()));
 	}
 
@@ -46,13 +45,12 @@ public class NodeItemCompareOutCount extends Node {
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "progOut", 0));
 		valOut.add(new PinValueOut<Number>(this, "amount", 0, new NumberData()));
 	}
 
 	@Override
 	public String getDefaultName() {
-		return defaultName;
+		return "ItemAmountSelector";
 	}
 
 	@Override

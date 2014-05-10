@@ -16,7 +16,6 @@ import libraries.nodecode.type.ItemStackData;
 import libraries.nodecode.type.NumberData;
 
 public class NodeItemStackSeperate extends Node {
-	public static final String defaultName = "ItemStackSeperator";
 
 	@Override
 	protected PinBase execute() {
@@ -29,7 +28,7 @@ public class NodeItemStackSeperate extends Node {
 	}
 
 	@Override
-	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {
+	public void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn) {
 		valIn.add(new PinValueIn<ItemStack>(this, "itemStack", 0, new ItemStackData())); 
 	}
 
@@ -38,7 +37,6 @@ public class NodeItemStackSeperate extends Node {
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "ProgOut", 0));
 		valOut.add(new PinValueOut<ItemStack>(this, "itemRef", 0, new ItemStackData()));
 		valOut.add(new PinValueOut<Number>(this, "itemID", 1, new NumberData()));
 		valOut.add(new PinValueOut<Number>(this, "meta", 2, new NumberData()));
@@ -47,7 +45,7 @@ public class NodeItemStackSeperate extends Node {
 
 	@Override
 	public String getDefaultName() {
-		return defaultName;
+		return "ItemStackSeperator";
 	}
 
 	@Override

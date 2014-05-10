@@ -15,7 +15,6 @@ import libraries.nodecode.type.NumberData;
 
 
 public class InputNodeSeperator extends Node {
-	public static final String defaultName = "InputNode";
 
 	ItemStack itemStack = new ItemStack(0, 0, 0);
 	int dir;
@@ -29,21 +28,20 @@ public class InputNodeSeperator extends Node {
 	}
 
 	@Override
-	public void initInputs(PinProgramIn progIn, ArrayList<PinValueIn<?>> valIn) {}
+	public void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn) {}
 
 	@Override
 	public void initConfigs(ArrayList<Config<?>> configs) {}
 
 	@Override
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
-		progOut.add(new PinProgramOut(this, "ProgOut", 0));
 		valOut.add(new PinValueOut<ItemStack>(this, "itemStack", 0, new ItemStackData()));
 		valOut.add(new PinValueOut<Number>(this, "dir", 1, new NumberData()));
 	}
 
 	@Override
 	public String getDefaultName() {
-		return defaultName;
+		return "InputNode";
 	}
 	
 	public void setItemStack(ItemStack is){
@@ -55,16 +53,10 @@ public class InputNodeSeperator extends Node {
 	}
 
 	@Override
-	protected void saveTo(XMLNode node) {
-		// TODO Auto-generated method stub
-		
-	}
+	protected void saveTo(XMLNode node) {}
 
 	@Override
-	protected void loadFrom(XMLNode node) {
-		// TODO Auto-generated method stub
-		
-	}
+	protected void loadFrom(XMLNode node) {}
 
 	@Override
 	public IPOType getIPOType() {
