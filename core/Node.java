@@ -107,6 +107,10 @@ public abstract class Node {
 		return progOut.get(index);
 	}
 	
+	public int getAmountOfProgOut(){
+		return progOut.size();
+	}
+	
 	public PinValueIn<?> getValIn(int index){
 		return valIn.get(index);
 	}

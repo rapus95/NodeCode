@@ -60,7 +60,7 @@ public class Config<Type> implements NodeComponent, ValueHandler<Type>{
 	@Override
 	public void saveTo(XMLNode node) {
 		XMLNode n = new XMLNode(XMLTypeName);
-		n.setProperty("name", name);
+		n.setString("name", name);
 		data.saveTo(n);
 		node.addChild(n);
 	}
@@ -69,7 +69,7 @@ public class Config<Type> implements NodeComponent, ValueHandler<Type>{
 	public void loadFrom(XMLNode node) {
 		XMLNode[] children = node.getChildByName(XMLTypeName);
 		for(XMLNode child:children){
-			if(child.getProperty("name").equalsIgnoreCase(name))
+			if(child.getString("name").equalsIgnoreCase(name))
 				continue;
 			data.loadFrom(child);
 			return;

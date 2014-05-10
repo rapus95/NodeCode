@@ -30,7 +30,7 @@ public class Grid {
 	}
 	
 	public void saveTo(XMLNode node){
-		node.setProperty("nextID", ""+nextID);
+		node.setInt("nextID", nextID);
 		for(Node n:nodes){
 			n.save(node);
 		}
@@ -47,7 +47,7 @@ public class Grid {
 		for(int i=0; i<nodes.size(); i++){
 			nodes.get(i).load2(own.getChild(i));
 		}
-		nextID = Integer.valueOf(own.getProperty("nextID"));
+		nextID = Integer.valueOf(own.getInt("nextID"));
 	}
 
 	public static void setCurrent(Grid grid) {

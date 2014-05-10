@@ -10,6 +10,6 @@ public class Helper {
 	}
 
 	public static boolean isNodeType(XMLNode n, String name){
-		return n.getProperty("type").equalsIgnoreCase(name);
+		return n.getString("type").equalsIgnoreCase(name);
 	}
 }
