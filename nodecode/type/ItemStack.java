@@ -1,4 +1,4 @@
-package type;
+package nodecode.type;
 
 public class ItemStack {
 

@@ -1,12 +1,12 @@
-package core;
+package nodecode.core;
 
 import java.util.concurrent.Callable;
 
-import node.NodeBranch;
-import node.NodeCountLoop;
-import node.NodeItemCompareOutCount;
-import node.NodeItemStackSeperate;
-import node.NodeMaths;
+import nodecode.node.NodeBranch;
+import nodecode.node.NodeCountLoop;
+import nodecode.node.NodeItemCompareOutCount;
+import nodecode.node.NodeItemStackSeperate;
+import nodecode.node.NodeMaths;
 
 public class GridHandler {
 
@@ -15,7 +15,7 @@ public class GridHandler {
 	}
 	
 	private static boolean loaded = false;
-	private static Grid current = new Grid();
+	private static Grid current = newGrid();
 
 	public static Grid newGrid() {
 		return new Grid();

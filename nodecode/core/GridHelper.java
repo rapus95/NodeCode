@@ -1,4 +1,4 @@
-package core;
+package nodecode.core;
 
 public class GridHelper {
 

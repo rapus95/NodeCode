@@ -1,7 +1,7 @@
-package type;
+package nodecode.type;
 
-import XML.XMLNode;
-import core.ValueType;
+import nodecode.XML.XMLNode;
+import nodecode.core.ValueType;
 
 public class ItemStackData implements ValueType<ItemStack> {
 

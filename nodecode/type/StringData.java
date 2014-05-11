@@ -1,8 +1,8 @@
-package type;
+package nodecode.type;
 
-import XML.XMLNode;
-import core.ValueType;
-import core.ValueType.COLOR;
+import nodecode.XML.XMLNode;
+import nodecode.core.ValueType;
+import nodecode.core.ValueType.COLOR;
 
 public class StringData implements ValueType<String> {
 

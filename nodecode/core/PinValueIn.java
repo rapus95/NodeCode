@@ -1,7 +1,7 @@
-package core;
+package nodecode.core;
 
-import XML.XMLNode;
-import core.ValueType.COLOR;
+import nodecode.XML.XMLNode;
+import nodecode.core.ValueType.COLOR;
 
 
 public class PinValueIn<Type> extends PinBaseImp implements PinInput, ValueHandler<Type> {

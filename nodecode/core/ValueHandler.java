@@ -1,4 +1,4 @@
-package core;
+package nodecode.core;
 
 
 public interface ValueHandler<Type> {

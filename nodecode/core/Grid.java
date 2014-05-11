@@ -1,8 +1,8 @@
-package core;
+package nodecode.core;
 
 import java.util.ArrayList;
 
-import XML.XMLNode;
+import nodecode.XML.XMLNode;
 
 public class Grid {
 	private ArrayList<Node> nodes = new ArrayList<Node>();

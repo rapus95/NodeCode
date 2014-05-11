@@ -1,4 +1,4 @@
-package core;
+package nodecode.core;
 
 
 public interface PinInput extends PinBase{

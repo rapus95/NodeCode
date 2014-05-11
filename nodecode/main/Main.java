@@ -1,11 +1,11 @@
-package main;
+package nodecode.main;
 import java.util.concurrent.Callable;
 
-import XML.XMLNode;
-import node.NodeMaths;
-import core.GridHandler;
-import core.GridHelper;
-import core.Node;
+import nodecode.XML.XMLNode;
+import nodecode.core.GridHandler;
+import nodecode.core.GridHelper;
+import nodecode.core.Node;
+import nodecode.node.NodeMaths;
 
 
 public class Main {

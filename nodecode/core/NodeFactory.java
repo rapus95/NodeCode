@@ -1,9 +1,9 @@
-package core;
+package nodecode.core;
 
 import java.util.HashMap;
 import java.util.concurrent.Callable;
 
-import XML.XMLNode;
+import nodecode.XML.XMLNode;
 
 public class NodeFactory {
 	

@@ -1,4 +1,4 @@
-package XML;
+package nodecode.XML;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
