@@ -13,13 +13,13 @@ import nodecode.node.NodeMaths;
 public class NodeFactory {
 	
 	private static boolean loaded = false;
-	
-	static{
-		init();
-	}
 
 	private static HashMap<String, INodeFactoryDescriptor> nodes = new HashMap<String, INodeFactoryDescriptor>();
 
+	static{
+		init();
+	}
+	
 	public static void registerNode(String name, INodeFactoryDescriptor n) {
 		if( !nodes.containsKey(name))
 			nodes.put(name, n);
