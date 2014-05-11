@@ -1,4 +1,4 @@
-package libraries.nodecode.core;
+package core;
 
 public interface PinOutput extends PinBase {
 	public void setTargetUnchecked(PinInput target);

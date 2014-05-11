@@ -1,12 +1,12 @@
-package libraries.nodecode.core;
+package core;
 
 import java.util.concurrent.Callable;
 
-import libraries.nodecode.node.NodeBranch;
-import libraries.nodecode.node.NodeCountLoop;
-import libraries.nodecode.node.NodeItemCompareOutCount;
-import libraries.nodecode.node.NodeItemStackSeperate;
-import libraries.nodecode.node.NodeMaths;
+import node.NodeBranch;
+import node.NodeCountLoop;
+import node.NodeItemCompareOutCount;
+import node.NodeItemStackSeperate;
+import node.NodeMaths;
 
 public class GridHandler {
 

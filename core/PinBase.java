@@ -1,6 +1,6 @@
-package libraries.nodecode.core;
+package core;
 
-import libraries.nodecode.core.ValueType.COLOR;
+import core.ValueType.COLOR;
 
 public interface PinBase extends NodeComponent {
 

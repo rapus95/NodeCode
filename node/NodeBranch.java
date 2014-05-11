@@ -1,19 +1,19 @@
-package libraries.nodecode.node;
+package node;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-import libraries.nodecode.XML.XMLNode;
-import libraries.nodecode.core.Config;
-import libraries.nodecode.core.Node;
-import libraries.nodecode.core.NodeFactory;
-import libraries.nodecode.core.PinBase;
-import libraries.nodecode.core.PinProgramIn;
-import libraries.nodecode.core.PinProgramOut;
-import libraries.nodecode.core.PinValueIn;
-import libraries.nodecode.core.PinValueOut;
-import libraries.nodecode.type.NumberData;
-import libraries.nodecode.type.SelectionData;
+import XML.XMLNode;
+import type.NumberData;
+import type.SelectionData;
+import core.Config;
+import core.Node;
+import core.NodeFactory;
+import core.PinBase;
+import core.PinProgramIn;
+import core.PinProgramOut;
+import core.PinValueIn;
+import core.PinValueOut;
 
 public class NodeBranch extends Node{
 	

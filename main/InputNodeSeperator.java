@@ -1,17 +1,17 @@
-package libraries.nodecode.main;
+package main;
 import java.util.ArrayList;
 
-import libraries.nodecode.XML.XMLNode;
-import libraries.nodecode.core.Config;
-import libraries.nodecode.core.Node;
-import libraries.nodecode.core.PinBase;
-import libraries.nodecode.core.PinProgramIn;
-import libraries.nodecode.core.PinProgramOut;
-import libraries.nodecode.core.PinValueIn;
-import libraries.nodecode.core.PinValueOut;
-import libraries.nodecode.type.ItemStack;
-import libraries.nodecode.type.ItemStackData;
-import libraries.nodecode.type.NumberData;
+import XML.XMLNode;
+import type.ItemStack;
+import type.ItemStackData;
+import type.NumberData;
+import core.Config;
+import core.Node;
+import core.PinBase;
+import core.PinProgramIn;
+import core.PinProgramOut;
+import core.PinValueIn;
+import core.PinValueOut;
 
 
 public class InputNodeSeperator extends Node {

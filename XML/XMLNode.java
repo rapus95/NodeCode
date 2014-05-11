@@ -1,4 +1,4 @@
-package libraries.nodecode.XML;
+package XML;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

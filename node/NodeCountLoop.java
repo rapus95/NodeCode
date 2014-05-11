@@ -1,18 +1,18 @@
-package libraries.nodecode.node;
+package node;
 
 import java.util.ArrayList;
 
-import libraries.nodecode.XML.XMLNode;
-import libraries.nodecode.core.Config;
-import libraries.nodecode.core.GridHelper;
-import libraries.nodecode.core.Helper;
-import libraries.nodecode.core.Node;
-import libraries.nodecode.core.PinBase;
-import libraries.nodecode.core.PinProgramIn;
-import libraries.nodecode.core.PinProgramOut;
-import libraries.nodecode.core.PinValueIn;
-import libraries.nodecode.core.PinValueOut;
-import libraries.nodecode.type.NumberData;
+import XML.XMLNode;
+import type.NumberData;
+import core.Config;
+import core.GridHelper;
+import core.Helper;
+import core.Node;
+import core.PinBase;
+import core.PinProgramIn;
+import core.PinProgramOut;
+import core.PinValueIn;
+import core.PinValueOut;
 
 public class NodeCountLoop extends Node {
 	

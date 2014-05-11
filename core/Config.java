@@ -1,6 +1,6 @@
-package libraries.nodecode.core;
+package core;
 
-import libraries.nodecode.XML.XMLNode;
+import XML.XMLNode;
 
 public class Config<Type> implements NodeComponent, ValueHandler<Type>{
 	public static final String XMLTypeName = "config";

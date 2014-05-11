@@ -1,7 +1,7 @@
-package libraries.nodecode.core;
+package core;
 
-import libraries.nodecode.XML.XMLNode;
-import libraries.nodecode.core.ValueType.COLOR;
+import XML.XMLNode;
+import core.ValueType.COLOR;
 
 
 

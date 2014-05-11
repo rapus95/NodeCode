@@ -1,7 +1,7 @@
-package libraries.nodecode.type;
+package type;
 
-import libraries.nodecode.XML.XMLNode;
-import libraries.nodecode.core.ValueType;
+import XML.XMLNode;
+import core.ValueType;
 
 public class SelectionData implements ValueType<Integer> {
 	

@@ -1,4 +1,4 @@
-package libraries.nodecode.core;
+package core;
 
 public interface PinProgram extends PinBase {
 

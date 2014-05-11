@@ -1,6 +1,6 @@
-package libraries.nodecode.core;
+package core;
 
-import libraries.nodecode.XML.XMLNode;
+import XML.XMLNode;
 
 public interface ValueType<DataType> {
 	public static final String XMLTypeName = "data";

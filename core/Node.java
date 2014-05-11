@@ -1,8 +1,8 @@
-package libraries.nodecode.core;
+package core;
 
 import java.util.ArrayList;
 
-import libraries.nodecode.XML.XMLNode;
+import XML.XMLNode;
 
 public abstract class Node{
 	private ArrayList<PinProgramIn> progIn = new ArrayList<PinProgramIn>();
