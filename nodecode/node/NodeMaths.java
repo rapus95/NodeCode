@@ -89,7 +89,7 @@ public class NodeMaths extends Node {
 
 		@Override
 		public String getDefaultName() {
-			return "NodeMaths";
+			return "Maths";
 		}
 
 		@Override
