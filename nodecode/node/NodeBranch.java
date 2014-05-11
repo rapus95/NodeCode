@@ -1,14 +1,12 @@
 package nodecode.node;
 
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
 
 import nodecode.XML.XMLNode;
 import nodecode.core.Config;
 import nodecode.core.Grid;
 import nodecode.core.INodeFactoryDescriptor;
 import nodecode.core.Node;
-import nodecode.core.NodeFactory;
 import nodecode.core.PinBase;
 import nodecode.core.PinProgramIn;
 import nodecode.core.PinProgramOut;
@@ -74,11 +72,6 @@ public class NodeBranch extends Node{
 	@Override
 	protected void loadFrom(XMLNode node) {}
 
-	@Override
-	public IPOType getIPOType() {
-		return IPOType.PROCESS;
-	}
-
 	private static final INodeFactoryDescriptor desc = new INodeFactoryDescriptor() {
 		
 		@Override
@@ -94,6 +87,16 @@ public class NodeBranch extends Node{
 		@Override
 		public String getDefaultName() {
 			return "BranchNode";
+		}
+
+		@Override
+		public IPOType getIPOType() {
+			return IPOType.PROCESS;
+		}
+		
+		@Override
+		public SpecialType getSpecialType() {
+			return SpecialType.FLOW;
 		}
 	};
 	@Override

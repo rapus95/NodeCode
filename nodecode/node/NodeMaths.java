@@ -75,11 +75,6 @@ public class NodeMaths extends Node {
 	@Override
 	protected void loadFrom(XMLNode node) {}
 
-	@Override
-	public IPOType getIPOType() {
-		return IPOType.PROCESS;
-	}
-
 	private static final INodeFactoryDescriptor desc = new INodeFactoryDescriptor() {
 		
 		@Override
@@ -95,6 +90,16 @@ public class NodeMaths extends Node {
 		@Override
 		public String getDefaultName() {
 			return "NodeMaths";
+		}
+
+		@Override
+		public IPOType getIPOType() {
+			return IPOType.PROCESS;
+		}
+		
+		@Override
+		public SpecialType getSpecialType() {
+			return SpecialType.CONVERT;
 		}
 	};
 	@Override

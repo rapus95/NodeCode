@@ -20,6 +20,9 @@ public abstract class Node{
 	public enum IPOType{
 		INPUT, PROCESS, OUTPUT, STORAGE;
 	}
+	public enum SpecialType{
+		FLOW, CONVERT, SPLIT, MERGE, STORAGE;
+	}
 	
 	protected Node(){
 		this(GridHandler.getCurrent(), true);
@@ -111,7 +114,6 @@ public abstract class Node{
 	public abstract void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn);
 	public abstract void initConfigs(ArrayList<Config<?>> configs);
 	public abstract void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut);
-	public abstract IPOType getIPOType();
 	protected abstract void saveTo(XMLNode node);
 	protected abstract void loadFrom(XMLNode node);
 	public abstract INodeFactoryDescriptor getNodeFactoryDescriptor();
@@ -122,6 +124,14 @@ public abstract class Node{
 	
 	public int getUniqueTypeID(){
 		return getNodeFactoryDescriptor().getUniqueTypeID();
+	}
+	
+	public IPOType getIPOType(){
+		return getNodeFactoryDescriptor().getIPOType();
+	}
+	
+	public SpecialType getSpecialType(){
+		return getNodeFactoryDescriptor().getSpecialType();
 	}
 	
 	public PinProgramIn getProgIn(int index){

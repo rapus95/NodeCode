@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import nodecode.XML.XMLNode;
 import nodecode.core.Config;
 import nodecode.core.Grid;
-import nodecode.core.GridHelper;
 import nodecode.core.Helper;
 import nodecode.core.INodeFactoryDescriptor;
 import nodecode.core.Node;
@@ -74,11 +73,6 @@ public class NodeCountLoop extends Node {
 	@Override
 	protected void loadFrom(XMLNode node) {}
 
-	@Override
-	public IPOType getIPOType() {
-		return IPOType.PROCESS;
-	}
-
 	private static final INodeFactoryDescriptor desc = new INodeFactoryDescriptor() {
 		
 		@Override
@@ -94,6 +88,16 @@ public class NodeCountLoop extends Node {
 		@Override
 		public String getDefaultName() {
 			return "Loop";
+		}
+
+		@Override
+		public IPOType getIPOType() {
+			return IPOType.PROCESS;
+		}
+		
+		@Override
+		public SpecialType getSpecialType() {
+			return SpecialType.FLOW;
 		}
 	};
 	@Override

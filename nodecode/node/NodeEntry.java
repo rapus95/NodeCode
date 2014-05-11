@@ -52,11 +52,6 @@ public class NodeEntry extends Node {
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {}
 
 	@Override
-	public IPOType getIPOType() {
-		return IPOType.INPUT;
-	}
-
-	@Override
 	protected void saveTo(XMLNode node) {}
 
 	@Override
@@ -78,6 +73,16 @@ public class NodeEntry extends Node {
 		@Override
 		public String getDefaultName() {
 			return "Entry";
+		}
+
+		@Override
+		public IPOType getIPOType() {
+			return IPOType.INPUT;
+		}
+		
+		@Override
+		public SpecialType getSpecialType() {
+			return SpecialType.FLOW;
 		}
 	};
 	@Override

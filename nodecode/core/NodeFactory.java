@@ -46,6 +46,10 @@ public class NodeFactory {
 		}
 		return null;
 	}
+	
+	public static INodeFactoryDescriptor[] getAvailableNodes(){
+		return nodes.values().toArray(new INodeFactoryDescriptor[0]);
+	}
 
 	private static void init() {
 		if(loaded) return;

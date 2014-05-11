@@ -12,7 +12,6 @@ import nodecode.core.PinProgramIn;
 import nodecode.core.PinProgramOut;
 import nodecode.core.PinValueIn;
 import nodecode.core.PinValueOut;
-import nodecode.node.NodeBranch;
 import nodecode.type.NumberData;
 import nodecode.type.SelectionData;
 
@@ -84,11 +83,6 @@ public class OutputNodeSeperator extends Node {
 	@Override
 	protected void loadFrom(XMLNode node) {}
 
-	@Override
-	public IPOType getIPOType() {
-		return IPOType.OUTPUT;
-	}
-
 	private static final INodeFactoryDescriptor desc = new INodeFactoryDescriptor() {
 		
 		@Override
@@ -104,6 +98,16 @@ public class OutputNodeSeperator extends Node {
 		@Override
 		public String getDefaultName() {
 			return "ReturnNode";
+		}
+
+		@Override
+		public IPOType getIPOType() {
+			return IPOType.OUTPUT;
+		}
+		
+		@Override
+		public SpecialType getSpecialType() {
+			return SpecialType.FLOW;
 		}
 	};
 	@Override
