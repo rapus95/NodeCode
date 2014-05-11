@@ -33,7 +33,10 @@ public class NodeFactory {
 	}
 
 	public static Node getNewNode(XMLNode child) {
-		return getNewNodeForName(child.getString("type"));
+		Node n = getNewNodeForName(child.getString("type"));
+		if(n==null)
+			n = getNewNodeForTypeID(child.getInt("typeID"));
+		return n;
 	}
 
 	public static Node getNewNodeForTypeID(int id){

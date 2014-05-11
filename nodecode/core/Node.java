@@ -84,6 +84,7 @@ public abstract class Node{
 		XMLNode own = new XMLNode(getIPOType().name());
 		own.setInt("id", uniqueID);
 		own.setBoolean("calcOnRequest", calcOnRequest);
+		own.setInt("typeID", getUniqueTypeID());
 		own.setString("type", getDefaultName());
 		own.setString("name", name);
 		saveTo(own);
@@ -117,6 +118,10 @@ public abstract class Node{
 	
 	public String getDefaultName(){
 		return getNodeFactoryDescriptor().getDefaultName();
+	}
+	
+	public int getUniqueTypeID(){
+		return getNodeFactoryDescriptor().getUniqueTypeID();
 	}
 	
 	public PinProgramIn getProgIn(int index){
