@@ -5,6 +5,8 @@ import java.util.concurrent.Callable;
 
 import nodecode.XML.XMLNode;
 import nodecode.core.Config;
+import nodecode.core.Grid;
+import nodecode.core.INodeFactoryDescriptor;
 import nodecode.core.Node;
 import nodecode.core.NodeFactory;
 import nodecode.core.PinBase;
@@ -17,6 +19,26 @@ import nodecode.type.SelectionData;
 
 public class NodeBranch extends Node{
 	
+	public NodeBranch() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeBranch(boolean register) {
+		super(register);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeBranch(Grid grid, boolean register) {
+		super(grid, register);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeBranch(Grid grid) {
+		super(grid);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	protected PinBase execute() {
 		PinValueIn<?> input1 = getValIn(0);
@@ -47,11 +69,6 @@ public class NodeBranch extends Node{
 	}
 
 	@Override
-	public String getDefaultName() {
-		return "BranchNode";
-	}
-
-	@Override
 	protected void saveTo(XMLNode node) {}
 
 	@Override
@@ -60,6 +77,28 @@ public class NodeBranch extends Node{
 	@Override
 	public IPOType getIPOType() {
 		return IPOType.PROCESS;
+	}
+
+	private static final INodeFactoryDescriptor desc = new INodeFactoryDescriptor() {
+		
+		@Override
+		public int getUniqueTypeID() {
+			return 2;
+		}
+		
+		@Override
+		public Node createNode() {
+			return new NodeBranch();
+		}
+
+		@Override
+		public String getDefaultName() {
+			return "BranchNode";
+		}
+	};
+	@Override
+	public INodeFactoryDescriptor getNodeFactoryDescriptor() {
+		return desc;
 	}
 	
 	

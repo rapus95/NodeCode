@@ -3,19 +3,42 @@ import java.util.ArrayList;
 
 import nodecode.XML.XMLNode;
 import nodecode.core.Config;
+import nodecode.core.Grid;
 import nodecode.core.Helper;
+import nodecode.core.INodeFactoryDescriptor;
 import nodecode.core.Node;
 import nodecode.core.PinBase;
 import nodecode.core.PinProgramIn;
 import nodecode.core.PinProgramOut;
 import nodecode.core.PinValueIn;
 import nodecode.core.PinValueOut;
+import nodecode.node.NodeBranch;
 import nodecode.type.NumberData;
 import nodecode.type.SelectionData;
 
 
 public class OutputNodeSeperator extends Node {
 	
+	public OutputNodeSeperator() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public OutputNodeSeperator(boolean register) {
+		super(register);
+		// TODO Auto-generated constructor stub
+	}
+
+	public OutputNodeSeperator(Grid grid, boolean register) {
+		super(grid, register);
+		// TODO Auto-generated constructor stub
+	}
+
+	public OutputNodeSeperator(Grid grid) {
+		super(grid);
+		// TODO Auto-generated constructor stub
+	}
+
 	int outputDirection[] = new int[4];
 	int dir;
 	
@@ -46,11 +69,6 @@ public class OutputNodeSeperator extends Node {
 	public void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut) {
 		progOut.clear();
 	}
-
-	@Override
-	public String getDefaultName() {
-		return "ReturnNode";
-	}
 	
 	public int[] getOutputDirection(){
 		return outputDirection;
@@ -69,6 +87,28 @@ public class OutputNodeSeperator extends Node {
 	@Override
 	public IPOType getIPOType() {
 		return IPOType.OUTPUT;
+	}
+
+	private static final INodeFactoryDescriptor desc = new INodeFactoryDescriptor() {
+		
+		@Override
+		public int getUniqueTypeID() {
+			return 41;
+		}
+		
+		@Override
+		public Node createNode() {
+			return new OutputNodeSeperator();
+		}
+
+		@Override
+		public String getDefaultName() {
+			return "ReturnNode";
+		}
+	};
+	@Override
+	public INodeFactoryDescriptor getNodeFactoryDescriptor() {
+		return desc;
 	}
 
 }

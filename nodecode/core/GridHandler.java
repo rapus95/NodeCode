@@ -1,20 +1,7 @@
 package nodecode.core;
 
-import java.util.concurrent.Callable;
-
-import nodecode.node.NodeBranch;
-import nodecode.node.NodeCountLoop;
-import nodecode.node.NodeItemCompareOutCount;
-import nodecode.node.NodeItemStackSeperate;
-import nodecode.node.NodeMaths;
 
 public class GridHandler {
-
-	static{
-		init();
-	}
-	
-	private static boolean loaded = false;
 	private static Grid current = newGrid();
 
 	public static Grid newGrid() {
@@ -27,49 +14,5 @@ public class GridHandler {
 
 	public static Grid getCurrent() {
 		return current;
-	}
-	
-	public static void registerNode(String name, Callable<Node> n){
-		NodeFactory.registerNode(name, n);
-	}
-
-	private static void init() {
-		if(loaded) return;
-		registerNode(new NodeBranch().getDefaultName(), new Callable<Node>() {
-
-			@Override
-			public Node call() throws Exception {
-				return new NodeBranch();
-			}
-		});
-		registerNode(new NodeCountLoop().getDefaultName(), new Callable<Node>() {
-
-			@Override
-			public Node call() throws Exception {
-				return new NodeCountLoop();
-			}
-		});
-		registerNode(new NodeItemCompareOutCount().getDefaultName(), new Callable<Node>() {
-
-			@Override
-			public Node call() throws Exception {
-				return new NodeItemCompareOutCount();
-			}
-		});
-		registerNode(new NodeItemStackSeperate().getDefaultName(), new Callable<Node>() {
-
-			@Override
-			public Node call() throws Exception {
-				return new NodeItemStackSeperate();
-			}
-		});
-		registerNode(new NodeMaths().getDefaultName(), new Callable<Node>() {
-
-			@Override
-			public Node call() throws Exception {
-				return new NodeMaths();
-			}
-		});
-		loaded = true;
 	}
 }

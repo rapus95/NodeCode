@@ -1,30 +1,18 @@
 package nodecode.main;
-import java.util.concurrent.Callable;
-
 import nodecode.XML.XMLNode;
 import nodecode.core.GridHandler;
 import nodecode.core.GridHelper;
 import nodecode.core.Node;
+import nodecode.core.NodeFactory;
 import nodecode.node.NodeMaths;
 
 
 public class Main {
 
 	public static void main(String[] args) {
-		GridHandler.registerNode(new InputNodeSeperator().getName(), new Callable<Node>() {
-			
-			@Override
-			public Node call() throws Exception {
-				return new InputNodeSeperator();
-			}
-		});
-		GridHandler.registerNode(new OutputNodeSeperator().getName(), new Callable<Node>() {
-			
-			@Override
-			public Node call() throws Exception {
-				return new OutputNodeSeperator();
-			}
-		});
+		Node n;
+		NodeFactory.registerNode((n=new InputNodeSeperator(false)).getDefaultName(),n.getNodeFactoryDescriptor());
+		NodeFactory.registerNode((n=new OutputNodeSeperator(false)).getDefaultName(),n.getNodeFactoryDescriptor());
 		NodeMaths nm = new NodeMaths();
 		NodeMaths nm1 = new NodeMaths();
 		NodeMaths nm2 = new NodeMaths();

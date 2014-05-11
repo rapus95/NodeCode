@@ -22,15 +22,26 @@ public abstract class Node{
 	}
 	
 	protected Node(){
-		this(GridHandler.getCurrent());
+		this(GridHandler.getCurrent(), true);
+	}
+	
+	protected Node(boolean register){
+		this(GridHandler.getCurrent(), register);
 	}
 	
 	protected Node(Grid grid){
+		this(grid, true);
+	}
+	
+	protected Node(Grid grid, boolean register){
 		progIn.add(new PinProgramIn(this, "ProgIn", 0));
 		progOut.add(new PinProgramOut(this, "ProgOut", 0));
 		this.x = 0;
 		this.y = 0;
-		uniqueID = grid.registerNode(this);
+		if(register)
+			uniqueID = grid.registerNode(this);
+		else
+			uniqueID = -1;
 		initInputs(progIn, valIn);
 		initConfigs(configs);
 		initOutputs(progOut, valOut);
@@ -99,10 +110,14 @@ public abstract class Node{
 	public abstract void initInputs(ArrayList<PinProgramIn> progIn, ArrayList<PinValueIn<?>> valIn);
 	public abstract void initConfigs(ArrayList<Config<?>> configs);
 	public abstract void initOutputs(ArrayList<PinProgramOut> progOut, ArrayList<PinValueOut<?>> valOut);
-	public abstract String getDefaultName();
 	public abstract IPOType getIPOType();
 	protected abstract void saveTo(XMLNode node);
 	protected abstract void loadFrom(XMLNode node);
+	public abstract INodeFactoryDescriptor getNodeFactoryDescriptor();
+	
+	public String getDefaultName(){
+		return getNodeFactoryDescriptor().getDefaultName();
+	}
 	
 	public PinProgramIn getProgIn(int index){
 		return progIn.get(index);

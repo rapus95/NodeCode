@@ -64,13 +64,4 @@ public class GridHelper {
 	public static void setNodeName(Node n, String name) {
 		n.setName(name);
 	}
-
-	public static Node runProgram(Node start) {
-		Node next = start;
-		Node tmp;
-		while((tmp = next.run()) != null) {
-			next = tmp;
-		};
-		return next;
-	}
 }

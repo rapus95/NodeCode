@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import nodecode.XML.XMLNode;
 import nodecode.core.Config;
+import nodecode.core.Grid;
 import nodecode.core.Helper;
+import nodecode.core.INodeFactoryDescriptor;
 import nodecode.core.Node;
 import nodecode.core.PinBase;
 import nodecode.core.PinProgramIn;
@@ -16,6 +18,26 @@ import nodecode.type.ItemStackData;
 import nodecode.type.NumberData;
 
 public class NodeItemStackSeperate extends Node {
+
+	public NodeItemStackSeperate() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeItemStackSeperate(boolean register) {
+		super(register);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeItemStackSeperate(Grid grid, boolean register) {
+		super(grid, register);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeItemStackSeperate(Grid grid) {
+		super(grid);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	protected PinBase execute() {
@@ -44,11 +66,6 @@ public class NodeItemStackSeperate extends Node {
 	}
 
 	@Override
-	public String getDefaultName() {
-		return "ItemStackSeperator";
-	}
-
-	@Override
 	protected void saveTo(XMLNode node) {}
 
 	@Override
@@ -57,6 +74,28 @@ public class NodeItemStackSeperate extends Node {
 	@Override
 	public IPOType getIPOType() {
 		return IPOType.PROCESS;
+	}
+
+	private static final INodeFactoryDescriptor desc = new INodeFactoryDescriptor() {
+		
+		@Override
+		public int getUniqueTypeID() {
+			return 5;
+		}
+		
+		@Override
+		public Node createNode() {
+			return new NodeItemStackSeperate();
+		}
+
+		@Override
+		public String getDefaultName() {
+			return "ItemStackSeperator";
+		}
+	};
+	@Override
+	public INodeFactoryDescriptor getNodeFactoryDescriptor() {
+		return desc;
 	}
 
 }

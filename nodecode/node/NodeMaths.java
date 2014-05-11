@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import nodecode.XML.XMLNode;
 import nodecode.core.Config;
+import nodecode.core.Grid;
 import nodecode.core.Helper;
+import nodecode.core.INodeFactoryDescriptor;
 import nodecode.core.Node;
 import nodecode.core.PinBase;
 import nodecode.core.PinProgramIn;
@@ -15,6 +17,26 @@ import nodecode.type.NumberData;
 import nodecode.type.SelectionData;
 
 public class NodeMaths extends Node {
+
+	public NodeMaths() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeMaths(boolean register) {
+		super(register);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeMaths(Grid grid, boolean register) {
+		super(grid, register);
+		// TODO Auto-generated constructor stub
+	}
+
+	public NodeMaths(Grid grid) {
+		super(grid);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	protected PinBase execute() {
@@ -48,11 +70,6 @@ public class NodeMaths extends Node {
 	}
 
 	@Override
-	public String getDefaultName() {
-		return "NodeMaths";
-	}
-
-	@Override
 	protected void saveTo(XMLNode node) {}
 
 	@Override
@@ -61,6 +78,28 @@ public class NodeMaths extends Node {
 	@Override
 	public IPOType getIPOType() {
 		return IPOType.PROCESS;
+	}
+
+	private static final INodeFactoryDescriptor desc = new INodeFactoryDescriptor() {
+		
+		@Override
+		public int getUniqueTypeID() {
+			return 4;
+		}
+		
+		@Override
+		public Node createNode() {
+			return new NodeMaths();
+		}
+
+		@Override
+		public String getDefaultName() {
+			return "NodeMaths";
+		}
+	};
+	@Override
+	public INodeFactoryDescriptor getNodeFactoryDescriptor() {
+		return desc;
 	}
 	
 	
